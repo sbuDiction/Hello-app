@@ -28,37 +28,13 @@ public class App {
         return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
-    static Connection getDatabaseConnection(String defualtJdbcUrl) throws URISyntaxException, SQLException {
-        ProcessBuilder processBuilder = new ProcessBuilder();
-        String database_url = processBuilder.environment().get("DATABASE_URL");
-        if (database_url != null) {
-
-            URI uri = new URI(database_url);
-            String[] hostParts = uri.getUserInfo().split(":");
-            String username = hostParts[0];
-            String password = hostParts[1];
-            String host = uri.getHost();
-
-            int port = uri.getPort();
-
-            String path = uri.getPath();
-            String url = String.format("jdbc:postgresql://%s:%s%s", host, port, path);
-
-            return (Connection) DriverManager.getConnection(url, username, password);
-
-        }
-
-        return (Connection) DriverManager.getConnection(defualtJdbcUrl);
-
-    }
-
 
     public static void main(String[] args) {
 
         staticFiles.location("/public");
         GreetManager manager = new GreetManager();
 
-        port(5000);
+        port(getHerokuAssignedPort());
 
         get("/hello", (request, response) -> {
             Map<String, Object> map = new HashMap<>();
