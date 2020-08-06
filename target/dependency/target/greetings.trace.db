@@ -1,0 +1,9 @@
+2020-08-06 15:07:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "TABLE [*]"; expected "identifier"; SQL statement:
+table [42001-199]
+2020-08-06 15:10:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT [*]"; expected "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS, INTERSECTS"; SQL statement:
+show table greetings [42001-199]
+2020-08-06 15:10:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "GREETINGS" not found; SQL statement:
+select * from greetings [42102-199]
