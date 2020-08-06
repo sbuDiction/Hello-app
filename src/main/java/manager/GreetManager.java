@@ -1,7 +1,9 @@
 package manager;
 
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GreetManager {
     private String greeting;
@@ -10,8 +12,7 @@ public class GreetManager {
     private final String INSERT_NAME_SQL = "INSERT INTO GREETINGS (NAME, COUNT_TIME) VALUES (?, ?)";
     private final String FIND_NAME_SQL = "SELECT * FROM GREETINGS WHERE NAME = ?";
     private final String UPDATE_USER_COUNTER = "UPDATE GREETINGS SET COUNT_TIME = ? WHERE NAME = ?";
-    private final String GET_DB_CONTENT = "SELECT * FROM GREETINGS";
-    private final String COUNTER = "SELECT COUNT(*) AS USER_COUNTER";
+    private final String GET_DB_CONTENT = "SELECT * FROM GREETINGS ORDER BY NAME";
 
     public GreetManager(Connection connection) {
         this.connection = connection;
@@ -27,6 +28,7 @@ public class GreetManager {
                 update_user_counter.setInt(1, resultSet.getInt("count_time") + 1);
                 update_user_counter.setString(2, name);
                 update_user_counter.execute();
+                greeting = "user already greeted";
             } else {
                 if (language.equals("english")) {
                     greeting = "Hello, " + name;
@@ -41,7 +43,6 @@ public class GreetManager {
                 add_user.setString(1, name);
                 add_user.setInt(2, 10);
                 add_user.execute();
-                greeting = "user already greeted";
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,15 +55,33 @@ public class GreetManager {
         return greeting;
     }
 
-    public int getCount() throws SQLException {
-        PreparedStatement count = connection.prepareStatement(COUNTER);
-        ResultSet resultSet = count.executeQuery();
-        return resultSet.getInt("USER_COUNT");
+    public Integer getCount() {
+        try {
+            PreparedStatement statement = connection.prepareStatement("select count(*) as count from greetings");
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("count");
+            } else {
+                return 0;
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+            return 0;
+        }
     }
 
-    public String getUsers() throws SQLException {
-        CallableStatement get_all_the_content = connection.prepareCall(GET_DB_CONTENT);
-        return get_all_the_content.getString("NAME");
+    public List<String> getUsers() throws SQLException {
+        List<String> stringList = new ArrayList<>();
+        try {
+            PreparedStatement get_all_the_content = connection.prepareStatement(GET_DB_CONTENT);
+            ResultSet resultSet = get_all_the_content.executeQuery();
+            while (resultSet.next()) {
+                stringList.add(resultSet.getString("name"));
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return stringList;
     }
 
     public int getEachUserCounter(String name) {

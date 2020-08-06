@@ -4,7 +4,6 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +20,7 @@ public class App {
         return 4567;
     }
 
-    public static Connection getConnection() throws Exception {
+    public static Connection getConnectionFromDb() throws Exception {
         return DriverManager.getConnection(KOANS_DATABASE_URL, "sa", "");
     }
 
@@ -31,7 +30,7 @@ public class App {
             Class.forName("org.h2.Driver");
 
             staticFiles.location("/public");
-            GreetManager manager = new GreetManager(getConnection());
+            GreetManager manager = new GreetManager(getConnectionFromDb());
             port(getHerokuAssignedPort());
 
             get("/hello", (request, response) -> {
@@ -51,11 +50,12 @@ public class App {
 
             get("/greeted/:username", (request, response) -> {
                 Map<String, Object> map = new HashMap<>();
-                manager.getEachUserCounter("Victor");
+//                manager.getEachUserCounter("Victor");
                 return new ModelAndView(map, "greeted.handlebars");
             }, new HandlebarsTemplateEngine());
 
         } catch (Exception e) {
+            System.out.println(e);
             e.printStackTrace();
         }
 
