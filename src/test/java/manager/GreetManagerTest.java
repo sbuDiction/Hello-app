@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GreetManagerTest {
 
-    final String KOANS_DATABASE_URL = "jdbc:h2:file:./target/greetings_test";
+    final String KOANS_DATABASE_URL = "jdbc:h2:file:./target/greetings";
 
     public Connection getConnection() throws Exception {
         return DriverManager.getConnection(KOANS_DATABASE_URL, "sa", "");
@@ -34,7 +34,7 @@ public class GreetManagerTest {
             GreetManager manager = new GreetManager(getConnection());
             manager.greeting("Victor", "english");
 
-            assertEquals(manager.getGreeting(), null);
+            assertEquals(manager.getGreeting(), "Hello, Victor");
         } catch (Exception e) {
             e.printStackTrace();
         }
