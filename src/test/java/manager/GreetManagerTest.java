@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GreetManagerTest {
@@ -30,7 +31,9 @@ public class GreetManagerTest {
     @Test
     public void getDatabaseConnection() throws Exception {
         try {
+            
             Class.forName("org.h2.Driver");
+            cleanUpTables();
             GreetManager manager = new GreetManager(getConnection());
             manager.greeting("Victor", "english");
 
