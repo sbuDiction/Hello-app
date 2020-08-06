@@ -36,7 +36,7 @@ public class GreetManagerTest {
             GreetManager manager = new GreetManager(getConnection());
             manager.greeting("Victor", "english");
 
-            assertEquals(manager.getGreeting(), null);
+            assertEquals(manager.getGreeting(), "Hello, Victor");
         } catch (Exception e) {
             e.printStackTrace();
         }
