@@ -41,7 +41,7 @@ public class GreetManager {
                 }
                 PreparedStatement add_user = connection.prepareStatement(INSERT_NAME_SQL);
                 add_user.setString(1, name);
-                add_user.setInt(2, 10);
+                add_user.setInt(2, 1);
                 add_user.execute();
             }
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class GreetManager {
         }
     }
 
-    public List<String> getUsers() throws SQLException {
+    public List<String> getUsers() {
         List<String> stringList = new ArrayList<>();
         try {
             PreparedStatement get_all_the_content = connection.prepareStatement(GET_DB_CONTENT);
