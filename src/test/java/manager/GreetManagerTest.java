@@ -4,13 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class GreetManagerTest {
 
-    final String KOANS_DATABASE_URL = "jdbc:h2:file:./target/greetings";
+    final String KOANS_DATABASE_URL = "jdbc:h2:file:./target/greetings_test";
 
     public Connection getConnection() throws Exception {
         return DriverManager.getConnection(KOANS_DATABASE_URL, "sa", "");

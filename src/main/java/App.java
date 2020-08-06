@@ -35,6 +35,8 @@ public class App {
 
             get("/hello", (request, response) -> {
                 Map<String, Object> map = new HashMap<>();
+                map.put("users", manager.getUsers());
+                map.put("counter", manager.getCount());
                 return new ModelAndView(map, "hello.handlebars");
             }, new HandlebarsTemplateEngine());
 
