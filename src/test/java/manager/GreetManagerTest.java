@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -72,8 +74,9 @@ public class GreetManagerTest {
             manager.greeting("Vusimuzi", "english");
             manager.greeting("Vusimuzi", "xhosa");
             manager.greeting("Vusimuzi", "zulu");
+            List<String> names = manager.getUsers();
 
-            assertEquals(manager.getUsers(), 1);
+            assertEquals(manager.getUsers(), names);
         } catch (Exception e) {
             e.printStackTrace();
         }
