@@ -1,5 +1,8 @@
 package manager;
 
+import languages.Language;
+import org.jdbi.v3.core.Handle;
+import org.jdbi.v3.core.Jdbi;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,10 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GreetManagerTest {
 
-    final String KOANS_DATABASE_URL = "jdbc:h2:file:./target/greetings";
-
     public Connection getConnection() throws Exception {
-        return DriverManager.getConnection(KOANS_DATABASE_URL, "sa", "");
+        Class.forName("org.h2.Driver");
+        String dbDiskURL = "jdbc:h2:file:./greetings_db";
+        Jdbi jdbi = Jdbi.create(dbDiskURL, "sa", "");
+        Handle handle = jdbi.open();
+        handle.execute("create table if not exists greetings ( id integer identity, name text not null, count_time int )");
+        return DriverManager.getConnection(dbDiskURL, "sa", "");
     }
 
     @BeforeEach
@@ -29,15 +35,59 @@ public class GreetManagerTest {
     }
 
     @Test
-    public void getDatabaseConnection() throws Exception {
+    public void greetingCounterTest() {
         try {
-            
-            Class.forName("org.h2.Driver");
             cleanUpTables();
-            GreetManager manager = new GreetManager(getConnection());
+            GreetManager manager = new GreetManager(getConnection(), "zulu");
             manager.greeting("Victor", "english");
+            manager.greeting("Sibusiso", "zulu");
 
-            assertEquals(manager.getGreeting(), "Hello, Victor");
+            assertEquals(manager.getCount(), 2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void greetingLanguageTest() {
+        try {
+            cleanUpTables();
+            GreetManager manager = new GreetManager(getConnection(), "xhosa");
+            manager.greeting("Vusimuzi", "xhosa");
+
+            assertEquals(manager.getGreeting(), "Molo, Vusimuzi");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void greetingNamesDuplicateTest() {
+        try {
+            cleanUpTables();
+            GreetManager manager = new GreetManager(getConnection(), "english");
+            manager.greeting("Vusimuzi", "xhosa");
+            manager.greeting("Vusimuzi", "english");
+            manager.greeting("Vusimuzi", "xhosa");
+            manager.greeting("Vusimuzi", "zulu");
+
+            assertEquals(manager.getUsers(), 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void functionalInterfacesTest() {
+        try {
+            cleanUpTables();
+            GreetManager manager = new GreetManager(getConnection(), "english");
+            manager.greet.greet("sbusiso", Language.valueOf(manager.getLanguage()));
+            assertEquals(manager.getGreeting(), "Hello, Sbusiso");
+            assertEquals(manager.getCount(), 1);
         } catch (Exception e) {
             e.printStackTrace();
         }

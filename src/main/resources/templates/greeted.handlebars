@@ -12,8 +12,18 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Hello user</h1>
+<div class="container">
+    <h1>Hello Sbu</h1>
+
+    <div class="greetedNamesList">
+        <ul>
+            {{#each listOfNames}}
+                <li>{{this}}</li>
+<!--                <li>{{this}}</li>-->
+<!--                <li>{{this}}</li>-->
+            {{/each}}
+        </ul>
     </div>
+</div>
 </body>
 </html>

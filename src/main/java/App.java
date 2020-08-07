@@ -1,4 +1,6 @@
 import manager.GreetManager;
+import org.jdbi.v3.core.Handle;
+import org.jdbi.v3.core.Jdbi;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -10,8 +12,6 @@ import java.util.Map;
 import static spark.Spark.*;
 
 public class App {
-    final static String KOANS_DATABASE_URL = "jdbc:h2:file:./target/greetings";
-
     static int getHerokuAssignedPort() {
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
@@ -21,7 +21,11 @@ public class App {
     }
 
     public static Connection getConnectionFromDb() throws Exception {
-        return DriverManager.getConnection(KOANS_DATABASE_URL, "sa", "");
+        String dbDiskURL = "jdbc:h2:file:./greetings_db";
+        Jdbi jdbi = Jdbi.create(dbDiskURL, "sa", "");
+        Handle handle = jdbi.open();
+        handle.execute("create table if not exists greetings ( id integer identity, name text not null, count_time int )");
+        return DriverManager.getConnection(dbDiskURL, "sa", "");
     }
 
 
@@ -30,7 +34,7 @@ public class App {
             Class.forName("org.h2.Driver");
 
             staticFiles.location("/public");
-            GreetManager manager = new GreetManager(getConnectionFromDb());
+            GreetManager manager = new GreetManager(getConnectionFromDb(), "english");
             port(getHerokuAssignedPort());
 
             get("/hello", (request, response) -> {
@@ -52,7 +56,7 @@ public class App {
 
             get("/greeted/:username", (request, response) -> {
                 Map<String, Object> map = new HashMap<>();
-//                manager.getEachUserCounter("Victor");
+//                map.put("listOfNames", manager.getUsers());
                 return new ModelAndView(map, "greeted.handlebars");
             }, new HandlebarsTemplateEngine());
 
