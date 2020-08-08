@@ -1,2 +1,6 @@
+database/DbManagement.class
+greetings/Greetings.class
+greetings/People.class
 App.class
+languages/Language.class
 manager/GreetManager.class

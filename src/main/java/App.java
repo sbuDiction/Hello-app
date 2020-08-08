@@ -46,7 +46,7 @@ public class App {
 
             post("/hello", (request, response) -> {
                 Map<String, Object> map = new HashMap<>();
-                manager.greeting(request.queryParams("username"), request.queryParams("language"));
+//                manager.greeting(request.queryParams("username"), request.queryParams("language"));
 
                 map.put("greeting", manager.getGreeting());
                 map.put("users", manager.getUsers());

@@ -1,6 +1,8 @@
 package database;
 
-@FunctionalInterface
+import java.sql.SQLException;
+
 public interface DbManagement {
-    void greetDbManagement(String name);
+    Boolean greetDbManagement(String name) throws SQLException;
+
 }
