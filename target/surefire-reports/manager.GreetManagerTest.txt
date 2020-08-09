@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: manager.GreetManagerTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.282 s <<< FAILURE! - in manager.GreetManagerTest
-getAllTheNamesGreeted  Time elapsed: 0.021 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <4> but was: <Hello, Sbusiso>
-	at manager.GreetManagerTest.getAllTheNamesGreeted(GreetManagerTest.java:108)
-
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.404 s - in manager.GreetManagerTest

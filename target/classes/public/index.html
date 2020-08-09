@@ -5,24 +5,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Java Web Dev WorkShop</title>
-
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
+<style>
+    body {
+        background-color: rgba(22, 21, 21, 0.87);
+        /* background-image: url(/media/sneaker.jpeg); */
+        background-repeat: no-repeat;
+        background-size: 40%;
+        background-position: center;
+    }
+</style>
+
 
 <body>
-<div class="container">
-    <form action="/greet" method="post">
-        <div class="ui icon input">
-            <input type="text" name="username" placeholder="Type your name">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="ui secondary pointing menu">
+                    <a style="color: rgb(197, 10, 10);" class="active item">
+                        Home
+                    </a>
+                    <!-- for later input -->
+                    <a href="#greeted" style="color: rgb(197, 10, 10);" class=" item">
+                        greeted
+                    </a>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="ui secondary button">
-            Post
-        </button>
-    </form>
 
-</div>
+        <div class="row">
+            <div style="padding-bottom: 20px;" class="col">
+                <h1 style="color:rgb(175, 7, 7)" class="heading">Greetings</h1>
+            </div>
+
+            <div class="w-100"></div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <div class="ui icon input">
+                    <input class="name" style="color: rgb(175, 7, 7);" type="text" placeholder="Enter name...">
+                    <i class="inverted circular  link icon"></i>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="field">
+                    <div class="ui selection dropdown">
+                        <input class="language" type="hidden" name="gender">
+                        <i class="dropdown icon"></i>
+                        <div style="color: rgb(175, 7, 7);" class="default text">Language</div>
+                        <div class="menu languageDrop">
+                            <script type='text/template' class="dropdownLanguage">
+                                {{#each lang}}
+                                <div class="item language" data-value="{{this}}">{{this}}</div>
+                                {{/each}}
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <button type="submit" class="positive ui button greet">Greet</button>
+            </div>
+        </div>
+
+        <div class="row shoeData">
+            <script type="text/x-template" class="shoesTemplate">
+                {{#each results}}
+                <div class="col-sm">
+                    <div style="padding-top: 2%;">
+                        <div class="ui raised card">
+                            <div class="image">
+                                <div class="ui placeholder">
+                                    <div class="square image">
+                                        <img class="ui image" src={{image1}}>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="ui placeholder">
+                                    <div class="header">
+                                        <div class="very short line">
+                                            <h3>{{brand}}</h3>
+                                            <p>{{color}}</p>
+                                        </div>
+                                        <div class="medium line">
+                                            <h4>R {{price}} </h4>
+                                        </div>
+                                    </div>
+                                    <div class="paragraph">
+                                        <div class="short line">
+                                            <h5>Stock: {{qty}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <button class="ui vertical animated orange button add" value="{{id}}" tabindex="0">
+                                    <div class="visible content">Add to cart</div>
+                                    <div class="hidden content">
+                                        <i class="cart icon"></i>
+                                    </div>
+                                    <!-- <input style="display:none;" class="shoe_id" type="text" value="{{id}}"> -->
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </script>
+        </div>
+    </div>
+    <div id="dimm" class="ui active dimmer">
+        <div class="ui big text loader">Setting up please wait..</div>
+    </div>
+    </div>
+
+
+
 </body>
+<script src="./javascript/greetings.js"></script>
 
 </html>

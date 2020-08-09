@@ -1,8 +1,5 @@
 package manager;
 
-import com.google.gson.Gson;
-import greetings.People;
-import jsonserialization.Serializer;
 import languages.Language;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;

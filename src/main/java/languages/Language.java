@@ -11,7 +11,6 @@ public enum Language {
     SOTHO("Dumela, "),
     CHINESE("Nǐn hǎo, ");
 
-
     private final String phrase;
 
     Language(String phrase) {
