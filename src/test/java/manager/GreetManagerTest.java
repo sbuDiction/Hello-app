@@ -1,6 +1,9 @@
 package manager;
 
-import languages.Language;
+import manager.greetings.Greetings;
+import manager.greetings.GreetingsDbMethods;
+import manager.greetings.People;
+import manager.languages.Language;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,11 +43,11 @@ public class GreetManagerTest {
     public void greetingCounterTest() {
         try {
             cleanUpTables();
-            GreetManager manager = new GreetManager(getConnection(), "zulu");
-            manager.greet.greet("victor", Language.valueOf(manager.getLanguage()));
-            manager.greet.greet("samuel", Language.valueOf(manager.getLanguage()));
+            GreetManager manager = new AppStater(getConnection());
+            manager.greet("samuel", new Greetings("samuel", Language.valueOf("ZULU")).getLanguage());
+            manager.greet("james", new Greetings("james", Language.valueOf("ZULU")).getLanguage());
 
-            assertEquals(manager.getCount(), 2);
+            assertEquals(new GreetingsDbMethods(getConnection()).getCount(), 2);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,62 +58,48 @@ public class GreetManagerTest {
     public void greetingLanguageTest() {
         try {
             cleanUpTables();
-            GreetManager manager = new GreetManager(getConnection(), "french");
-            manager.greet.greet("Vusimuzi", Language.valueOf(manager.getLanguage()));
+            GreetManager manager = new AppStater(getConnection());
+            String greetings = manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
+            System.out.println(greetings);
+            assertEquals(greetings, "Bonjour, Vusimuzi");
 
-            assertEquals(manager.getGreeting(), "Bonjour, Vusimuzi");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
+    //
     @Test
     public void greetingNamesDuplicateTest() {
         try {
             cleanUpTables();
-            GreetManager manager = new GreetManager(getConnection(), "english");
-            manager.greet.greet("Vusimuzi", Language.valueOf(manager.getLanguage()));
-            manager.greet.greet("Vusimuzi", Language.valueOf(manager.getLanguage()));
-            manager.greet.greet("Vusimuzi", Language.valueOf(manager.getLanguage()));
-            manager.greet.greet("Vusimuzi", Language.valueOf(manager.getLanguage()));
-            List<String> names = manager.getUsers();
-
-            assertEquals(manager.getUsers(), names);
+            GreetManager manager = new AppStater(getConnection());
+            String greetings = manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
+            manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
+            manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
+            manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
+            GreetingsDbMethods methods = new GreetingsDbMethods(getConnection());
+            List<String> list = methods.getNames();
+            assertEquals(methods.getNames(), list);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-    }
-
-    @Test
-    public void functionalInterfacesTest() {
-        try {
-            cleanUpTables();
-            GreetManager manager = new GreetManager(getConnection(), "english");
-            manager.greet.greet("sbusiso", Language.valueOf(manager.getLanguage()));
-            assertEquals(manager.getGreeting(), "Hello, Sbusiso");
-            assertEquals(manager.getCount(), 1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
     @Test
     public void getAllTheNamesGreeted() {
         try {
             cleanUpTables();
-            GreetManager manager = new GreetManager(getConnection(), "sotho");
-
-            manager.greet.greet("sbusiso", Language.valueOf(manager.getLanguage()));
-            manager.greet.greet("thabiso", Language.valueOf(manager.getLanguage()));
-            manager.greet.greet("jobe", Language.valueOf(manager.getLanguage()));
-            manager.greet.greet("jobe", Language.valueOf(manager.getLanguage()));
-            manager.greet.greet("khumalo", Language.valueOf(manager.getLanguage()));
-            String list = Arrays.toString(manager.getNames().toArray());
-
-            assertEquals(list, list);
+            GreetManager manager = new AppStater(getConnection());
+            manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
+            manager.greet("sbusiso", new Greetings("sbusiso", Language.valueOf("ENGLISH")).getLanguage());
+            manager.greet("thabiso", new Greetings("thabiso", Language.valueOf("XHOSA")).getLanguage());
+            manager.greet("jobe", new Greetings("jobe", Language.valueOf("SOTHO")).getLanguage());
+            manager.greet("khumalo", new Greetings("khumalo", Language.valueOf("ZULU")).getLanguage());
+            List<String> list = new GreetingsDbMethods(getConnection()).getNames();
+            System.out.println(list);
+            assertEquals(new GreetingsDbMethods(getConnection()).getNames(), list);
         } catch (Exception e) {
             e.printStackTrace();
         }

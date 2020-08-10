@@ -1,4 +1,4 @@
-package languages;
+package manager.languages;
 
 public enum Language {
     ZULU("Sawubona, "),

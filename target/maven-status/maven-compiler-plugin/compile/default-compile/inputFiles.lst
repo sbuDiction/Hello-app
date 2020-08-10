@@ -1,6 +1,12 @@
-/home/codex/Documents/Projects/Hello-app/src/main/java/greetings/People.java
+/home/codex/Documents/Projects/Hello-app/src/main/java/manager/AppStater.java
 /home/codex/Documents/Projects/Hello-app/src/main/java/manager/GreetManager.java
-/home/codex/Documents/Projects/Hello-app/src/main/java/languages/Language.java
-/home/codex/Documents/Projects/Hello-app/src/main/java/greetings/Greetings.java
+/home/codex/Documents/Projects/Hello-app/src/main/java/manager/greetings/SqlQueries.java
+/home/codex/Documents/Projects/Hello-app/src/main/java/manager/languages/Language.java
+/home/codex/Documents/Projects/Hello-app/src/main/java/api/greetings/GreetingsApi.java
+/home/codex/Documents/Projects/Hello-app/src/main/java/jsonserialization/Serializer.java
+/home/codex/Documents/Projects/Hello-app/src/main/java/manager/languages/LanguageJson.java
+/home/codex/Documents/Projects/Hello-app/src/main/java/jsonserialization/Deserializer.java
+/home/codex/Documents/Projects/Hello-app/src/main/java/manager/greetings/GreetingsDbMethods.java
+/home/codex/Documents/Projects/Hello-app/src/main/java/manager/greetings/Greetings.java
+/home/codex/Documents/Projects/Hello-app/src/main/java/manager/greetings/People.java
 /home/codex/Documents/Projects/Hello-app/src/main/java/App.java
-/home/codex/Documents/Projects/Hello-app/src/main/java/database/DbManagement.java

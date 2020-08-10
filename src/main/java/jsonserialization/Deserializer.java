@@ -1,7 +1,5 @@
 package jsonserialization;
 
-import languages.Language;
-
 public class Deserializer extends Serializer {
     private String userName;
     private String language;

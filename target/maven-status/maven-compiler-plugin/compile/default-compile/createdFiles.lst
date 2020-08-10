@@ -1,7 +1,2 @@
-greetings/People.class
 App.class
-jsonserialization/SerializerAndDeserializer.class
 manager/GreetManager.class
-database/DbManagement.class
-greetings/Greetings.class
-languages/Language.class

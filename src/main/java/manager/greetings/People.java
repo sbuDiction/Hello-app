@@ -1,4 +1,4 @@
-package greetings;
+package manager.greetings;
 
 public class People {
     private String name;
