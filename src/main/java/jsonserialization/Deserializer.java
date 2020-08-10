@@ -5,7 +5,6 @@ public class Deserializer extends Serializer {
     private String language;
 
     public void setUserName(String userName) {
-        System.out.println(userName);
         this.userName = userName;
     }
 
@@ -14,7 +13,6 @@ public class Deserializer extends Serializer {
     }
 
     public String getUserName() {
-        System.out.println(userName);
         return userName;
     }
 

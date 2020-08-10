@@ -1,6 +1,8 @@
 package manager.greetings;
 
 import jsonserialization.Serializer;
+import manager.AppStater;
+import manager.GreetManager;
 import manager.languages.Language;
 import manager.languages.LanguageJson;
 
@@ -11,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GreetingsDbMethods {
+public class GreetingsDbMethods implements GreetingsInterface {
     private Connection connection;
 
     public GreetingsDbMethods(Connection connection) {
@@ -19,6 +21,7 @@ public class GreetingsDbMethods {
     }
 
     public Boolean checkNameDuplicate(String name) throws SQLException {
+        System.out.println(name);
         PreparedStatement find_user = connection.prepareStatement(String.valueOf(SqlQueries.FIND_NAME_SQL.getQuery()));
         find_user.setString(1, name);
         ResultSet resultSet = find_user.executeQuery();
@@ -50,16 +53,6 @@ public class GreetingsDbMethods {
         return greetedList;
     }
 
-    public List<String> getLanguageList() {
-        List<String> languageList = new ArrayList<>();
-        Language[] langs = Language.values();
-
-        for (Language language : langs
-        ) {
-            languageList.add(new Serializer().fromObjectToJson(new LanguageJson(language.toString())));
-        }
-        return languageList;
-    }
 
     public Integer getCount() {
         try {
@@ -74,5 +67,15 @@ public class GreetingsDbMethods {
             se.printStackTrace();
             return 0;
         }
+    }
+
+    @Override
+    public String greet(String name, Language language) {
+        return null;
+    }
+
+    @Override
+    public String addName(String name) {
+        return name;
     }
 }

@@ -40,6 +40,7 @@ const get_language = () => {
 }
 
 async function greet() {
+    const self = this;
     let userName = nameInput.value;
     let languageSelected = language.value;
 
@@ -49,6 +50,11 @@ async function greet() {
     }
 
     await axios.post('/api/greetings/greet', params)
+        .then((results) => {
+            let data = results.data;
+            self.language = data.language;
+            console.log(results);
+        })
 }
 
 const greetingMessage = () => {
@@ -59,14 +65,12 @@ const greetingMessage = () => {
 
             let displayHtml = greetMsgCompiler({ greetings: message });
             pageContent.innerHTML = displayHtml;
-
-
         })
 }
 
 greetButton.addEventListener('click', function () {
     greet()
-    greetingMessage()
+    // greetingMessage()
     console.log(greet());
 
 })
@@ -78,10 +82,10 @@ window.onhashchange = () => {
 
 }
 
-const toggleLoader = () => {
-    const spinner = document.querySelector('.loader');
-    spinner.classList.toggle('hidden');
-}
+// const toggleLoader = () => {
+//     const spinner = document.querySelector('.loader');
+//     spinner.classList.toggle('hidden');
+// }
 
 let startTime = new Date().getTime();
 const onLoadEventHandler = () => {

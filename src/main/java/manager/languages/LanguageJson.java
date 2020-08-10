@@ -1,13 +1,13 @@
 package manager.languages;
 
 public class LanguageJson {
-    private String message;
+    private String language;
 
-    public LanguageJson(String message) {
-        this.message = message;
+    public LanguageJson(String language) {
+        this.language = language;
     }
 
-    public String getMessage() {
-        return message;
+    public String getLanguage() {
+        return language;
     }
 }

@@ -35,9 +35,10 @@ public class App {
         try {
             Class.forName("org.h2.Driver");
             staticFiles.location("/public");
-            GreetManager manager = new AppStater(getConnectionFromDb());
-//            GreetingsDbMethods methods = new GreetingsDbMethods(getConnectionFromDb());
-            GreetingsApi api = new GreetingsApi(manager);
+            GreetManager manager = new GreetManager();
+            GreetingsDbMethods methods = new GreetingsDbMethods(getConnectionFromDb());
+            GreetingsApi api = new GreetingsApi(manager, methods);
+            AppStater appStater = new AppStater(getConnectionFromDb());
             port(getHerokuAssignedPort());
 
 
@@ -64,7 +65,7 @@ public class App {
 
 //            get("/api/greet/greeted/names", api.greeted_names());
             post("/api/greetings/greet", api.greet_user());
-//            get("/api/greetings/language", api.showLanguages());
+            get("/api/greetings/language", api.showLanguages());
 //            get("/api/greetings/message", api.getGreetingMessage());
 
         } catch (Exception e) {

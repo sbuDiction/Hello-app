@@ -15,12 +15,14 @@ import java.sql.SQLException;
 
 public class GreetingsApi {
     GreetManager manager;
+    GreetingsDbMethods greetingsDbMethods;
 
-    public GreetingsApi(GreetManager manager) {
+    public GreetingsApi(GreetManager manager, GreetingsDbMethods greetingsDbMethods) {
         this.manager = manager;
+        this.greetingsDbMethods = greetingsDbMethods;
     }
 
-//    GreetManager appStarter = new AppStater()
+    //    GreetManager appStarter = new AppStater()
 ////    AppStater appStater = new AppStater();
 ////    GreetManager manager = new GreetManager(appStater.getConnectionFromDb(), "english");
 //
@@ -53,21 +55,22 @@ public class GreetingsApi {
 //        return manager.getNames();
 //    }
 //
-//    public Route showLanguages() {
-//        return (request, response) -> manager.getLanguageList();
-//    }
+    public Route showLanguages() {
+        return (request, response) -> manager.getLanguageList();
+    }
 //
 //    public Route getGreetingMessage() {
 //        return (request, response) -> manager.getGreeting();
 //    }
 
     public Route greet_user() {
-        return (request, response) -> {
-            response.type("application/json");
-            Deserializer deserializer = new Gson().fromJson(request.body(), Deserializer.class);
-            String greeting = manager.greet(deserializer.getUserName(), Language.valueOf(deserializer.getLanguage()));
-            System.out.println(greeting);
-            return new LanguageJson(greeting);
-        };
+        return this::handle;
+    }
+
+    private Object handle(Request request, Response response) throws SQLException {
+        response.type("application/json");
+        Deserializer deserializer = new Gson().fromJson(request.body(), Deserializer.class);
+        //        System.out.println(greeting + " this one");
+        return manager.greet(deserializer.getUserName(), Language.valueOf(deserializer.getLanguage()));
     }
 }

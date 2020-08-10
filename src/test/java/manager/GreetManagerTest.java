@@ -43,11 +43,15 @@ public class GreetManagerTest {
     public void greetingCounterTest() {
         try {
             cleanUpTables();
-            GreetManager manager = new AppStater(getConnection());
+            GreetManager manager = new GreetManager();
+            GreetingsDbMethods greetingsDbMethods = new GreetingsDbMethods(getConnection());
+//            greetingsDbMethods
+
             manager.greet("samuel", new Greetings("samuel", Language.valueOf("ZULU")).getLanguage());
             manager.greet("james", new Greetings("james", Language.valueOf("ZULU")).getLanguage());
-
-            assertEquals(new GreetingsDbMethods(getConnection()).getCount(), 2);
+            greetingsDbMethods.checkNameDuplicate(manager.addName("samuel"));
+            greetingsDbMethods.checkNameDuplicate(manager.addName("james"));
+            assertEquals(greetingsDbMethods.getCount(), 2);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,9 +62,9 @@ public class GreetManagerTest {
     public void greetingLanguageTest() {
         try {
             cleanUpTables();
-            GreetManager manager = new AppStater(getConnection());
+            GreetManager manager = new GreetManager();
+            GreetingsDbMethods greetingsDbMethods = new GreetingsDbMethods(getConnection());
             String greetings = manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
-            System.out.println(greetings);
             assertEquals(greetings, "Bonjour, Vusimuzi");
 
         } catch (Exception e) {
@@ -74,14 +78,20 @@ public class GreetManagerTest {
     public void greetingNamesDuplicateTest() {
         try {
             cleanUpTables();
-            GreetManager manager = new AppStater(getConnection());
+            GreetManager manager = new GreetManager();
+            GreetingsDbMethods greetingsDbMethods = new GreetingsDbMethods(getConnection());
             String greetings = manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
             manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
             manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
             manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
+            greetingsDbMethods.checkNameDuplicate(manager.addName("vusimuzi"));
+            greetingsDbMethods.checkNameDuplicate(manager.addName("vusimuzi"));
+            greetingsDbMethods.checkNameDuplicate(manager.addName("vusimuzi"));
+            greetingsDbMethods.checkNameDuplicate(manager.addName("vusimuzi"));
             GreetingsDbMethods methods = new GreetingsDbMethods(getConnection());
             List<String> list = methods.getNames();
-            assertEquals(methods.getNames(), list);
+            System.out.println(list);
+            assertEquals(methods.getNames().size(), 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,15 +101,21 @@ public class GreetManagerTest {
     public void getAllTheNamesGreeted() {
         try {
             cleanUpTables();
-            GreetManager manager = new AppStater(getConnection());
+            GreetManager manager = new GreetManager();
+            GreetingsDbMethods greetingsDbMethods = new GreetingsDbMethods(getConnection());
             manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
             manager.greet("sbusiso", new Greetings("sbusiso", Language.valueOf("ENGLISH")).getLanguage());
             manager.greet("thabiso", new Greetings("thabiso", Language.valueOf("XHOSA")).getLanguage());
             manager.greet("jobe", new Greetings("jobe", Language.valueOf("SOTHO")).getLanguage());
             manager.greet("khumalo", new Greetings("khumalo", Language.valueOf("ZULU")).getLanguage());
+            greetingsDbMethods.checkNameDuplicate(manager.addName("sbusiso"));
+            greetingsDbMethods.checkNameDuplicate(manager.addName("thibiso"));
+            greetingsDbMethods.checkNameDuplicate(manager.addName("jobe"));
+            greetingsDbMethods.checkNameDuplicate(manager.addName("khumalo"));
+            greetingsDbMethods.checkNameDuplicate(manager.addName("vusimuzi"));
             List<String> list = new GreetingsDbMethods(getConnection()).getNames();
             System.out.println(list);
-            assertEquals(new GreetingsDbMethods(getConnection()).getNames(), list);
+            assertEquals(greetingsDbMethods.getNames().size(), 5);
         } catch (Exception e) {
             e.printStackTrace();
         }
