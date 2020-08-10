@@ -51,6 +51,7 @@ public class GreetManagerTest {
             manager.greet("james", new Greetings("james", Language.valueOf("ZULU")).getLanguage());
             greetingsDbMethods.checkNameDuplicate(manager.addName("samuel"));
             greetingsDbMethods.checkNameDuplicate(manager.addName("james"));
+            greetingsDbMethods.checkNameDuplicate(manager.addName("james"));
             assertEquals(greetingsDbMethods.getCount(), 2);
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +65,8 @@ public class GreetManagerTest {
             cleanUpTables();
             GreetManager manager = new GreetManager();
             GreetingsDbMethods greetingsDbMethods = new GreetingsDbMethods(getConnection());
-            String greetings = manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
+            manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
+            String greetings = manager.getGreetings();
             assertEquals(greetings, "Bonjour, Vusimuzi");
 
         } catch (Exception e) {
@@ -80,7 +82,8 @@ public class GreetManagerTest {
             cleanUpTables();
             GreetManager manager = new GreetManager();
             GreetingsDbMethods greetingsDbMethods = new GreetingsDbMethods(getConnection());
-            String greetings = manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
+            String greetings = manager.getGreetings();
+            manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
             manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
             manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
             manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());

@@ -21,7 +21,7 @@ const get_names = () => {
     axios.get('/api/greet/greeted/names')
         .then((response) => {
             let userName = response.data
-            console.log(userName);
+            console.log(response.data);
 
             let showHtml = greetedNamesCompiler({ names: userName });
             pageContent.innerHTML = showHtml;
@@ -33,6 +33,8 @@ const get_language = () => {
     axios.get('/api/greetings/language')
         .then((response) => {
             let languageList = response.data
+            console.log(languageList);
+            
 
             let displayHtml = dropdownCompiler({ lang: languageList })
             dropdownData.innerHTML = displayHtml;
@@ -48,6 +50,8 @@ async function greet() {
         "userName": userName,
         "language": languageSelected
     }
+    console.log(params);
+    
 
     await axios.post('/api/greetings/greet', params)
         .then((results) => {
@@ -70,9 +74,6 @@ const greetingMessage = () => {
 
 greetButton.addEventListener('click', function () {
     greet()
-    // greetingMessage()
-    console.log(greet());
-
 })
 
 window.onhashchange = () => {

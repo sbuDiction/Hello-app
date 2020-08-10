@@ -1,16 +1,13 @@
-import api.greetings.GreetingsApi;
+import jsonserialization.Serializer;
+import manager.api.greetings.GreetingsApi;
 import manager.AppStater;
 import manager.GreetManager;
 import manager.greetings.GreetingsDbMethods;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
-import spark.ModelAndView;
-import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.HashMap;
-import java.util.Map;
 
 import static spark.Spark.*;
 
@@ -63,10 +60,10 @@ public class App {
 //                return new ModelAndView(map, "greeted.handlebars");
 //            }, new HandlebarsTemplateEngine());
 
-//            get("/api/greet/greeted/names", api.greeted_names());
-            post("/api/greetings/greet", api.greet_user());
-            get("/api/greetings/language", api.showLanguages());
-//            get("/api/greetings/message", api.getGreetingMessage());
+            get("/api/greet/greeted/names", api.greeted_names());
+            post("/api/greetings/greet", api.greet_user(), new Serializer());
+            get("/api/greetings/language", api.showLanguages(), new Serializer());
+//            get("/manager.api/greetings/message", manager.api.getGreetingMessage());
 
         } catch (Exception e) {
             e.printStackTrace();

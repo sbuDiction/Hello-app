@@ -10,4 +10,3 @@ jsonserialization/Serializer.class
 manager/GreetManager.class
 jsonserialization/Deserializer.class
 manager/greetings/People.class
-api/greetings/GreetingsApi.class

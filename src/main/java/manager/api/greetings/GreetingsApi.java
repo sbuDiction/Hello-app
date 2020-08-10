@@ -1,12 +1,10 @@
-package api.greetings;
+package manager.api.greetings;
 
 import com.google.gson.Gson;
 import jsonserialization.Deserializer;
 import manager.greetings.GreetingsDbMethods;
 import manager.languages.Language;
-import manager.AppStater;
 import manager.GreetManager;
-import manager.languages.LanguageJson;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -33,10 +31,11 @@ public class GreetingsApi {
 //        return this::handle;
 //    }
 //
-//    public Route greeted_names() {
-//        return this::handle2;
-//    }
-//
+    public Route greeted_names() {
+        return this::handle2;
+    }
+
+    //
 //    private Object handle(Request request, Response response) {
 //        try {
 //            response.type("application/json");
@@ -51,10 +50,11 @@ public class GreetingsApi {
 //        return manager.getGreeting();
 //    }
 //
-//    private Object handle2(Request request, Response response) throws SQLException {
-//        return manager.getNames();
-//    }
-//
+    private Object handle2(Request request, Response response) throws SQLException {
+        return greetingsDbMethods.getNames();
+    }
+
+    //
     public Route showLanguages() {
         return (request, response) -> manager.getLanguageList();
     }
@@ -70,7 +70,9 @@ public class GreetingsApi {
     private Object handle(Request request, Response response) throws SQLException {
         response.type("application/json");
         Deserializer deserializer = new Gson().fromJson(request.body(), Deserializer.class);
-        //        System.out.println(greeting + " this one");
+//        manager.greet(deserializer.getUserName(), Language.valueOf(deserializer.getLanguage()));
+        System.out.println(manager.greet(deserializer.getUserName(), Language.valueOf(deserializer.getLanguage())) + " this one");
+        greetingsDbMethods.checkNameDuplicate(manager.addName(deserializer.getUserName()));
         return manager.greet(deserializer.getUserName(), Language.valueOf(deserializer.getLanguage()));
     }
 }

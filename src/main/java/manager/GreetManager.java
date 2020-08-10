@@ -2,7 +2,6 @@ package manager;
 
 import jsonserialization.Serializer;
 import manager.greetings.Greetings;
-import manager.greetings.GreetingsDbMethods;
 import manager.greetings.GreetingsInterface;
 import manager.languages.Language;
 import manager.languages.LanguageJson;
@@ -11,19 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GreetManager implements GreetingsInterface {
+    private String greetings;
+
 
     @Override
     public String greet(String name, Language language) {
         String username = name.substring(0, 1).toUpperCase() + name.substring(1);
-        try {
-            if (language.equals(new Greetings(username, language).getLanguage())) {
-                addName(username);
-                return language.getPhrase() + username;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        Greetings greet = new Greetings(username, language);
+        System.out.println(language.equals(greet.getLanguage()));
+        if (language.equals(greet.getLanguage())) {
+            return language.getPhrase() + username;
+        } else {
+            return Language.JAPANESE.getPhrase() + username;
         }
-        return Language.CHINESE.getPhrase() + username;
     }
 
     @Override
@@ -37,8 +36,12 @@ public class GreetManager implements GreetingsInterface {
 
         for (Language language : langs
         ) {
-            languageList.add(new Serializer().fromObjectToJson(new LanguageJson(language.toString())));
+            languageList.add(language.toString());
         }
         return languageList;
+    }
+
+    public String getGreetings() {
+        return greetings;
     }
 }

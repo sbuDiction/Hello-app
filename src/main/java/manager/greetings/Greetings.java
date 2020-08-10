@@ -10,9 +10,11 @@ public class Greetings {
         this.name = name;
         this.language = language;
     }
+
     public String getName() {
         return name;
     }
+
     public Language getLanguage() {
         return language;
     }

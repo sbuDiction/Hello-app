@@ -1,10 +1,7 @@
 package manager.greetings;
 
 import jsonserialization.Serializer;
-import manager.AppStater;
-import manager.GreetManager;
 import manager.languages.Language;
-import manager.languages.LanguageJson;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,24 +17,27 @@ public class GreetingsDbMethods implements GreetingsInterface {
         this.connection = connection;
     }
 
-    public Boolean checkNameDuplicate(String name) throws SQLException {
-        System.out.println(name);
-        PreparedStatement find_user = connection.prepareStatement(String.valueOf(SqlQueries.FIND_NAME_SQL.getQuery()));
-        find_user.setString(1, name);
-        ResultSet resultSet = find_user.executeQuery();
-        if (resultSet.next()) {
-            PreparedStatement update_user_counter = connection.prepareStatement(String.valueOf(SqlQueries.UPDATE_USER_COUNTER.getQuery()));
-            update_user_counter.setInt(1, resultSet.getInt("count_time") + 1);
-            update_user_counter.setString(2, name);
-            update_user_counter.execute();
-            return true;
-        } else {
-            PreparedStatement add_user = connection.prepareStatement(String.valueOf(SqlQueries.INSERT_NAME_SQL.getQuery()));
-            add_user.setString(1, name);
-            add_user.setInt(2, 1);
-            add_user.execute();
-            return false;
+    public void checkNameDuplicate(String name) {
+        try {
+            PreparedStatement find_user = connection.prepareStatement(String.valueOf(SqlQueries.FIND_NAME_SQL.getQuery()));
+            find_user.setString(1, name);
+            ResultSet resultSet = find_user.executeQuery();
+//            System.out.println(!resultSet.next());
+            if (resultSet.next()) {
+                PreparedStatement update_user_counter = connection.prepareStatement(String.valueOf(SqlQueries.UPDATE_USER_COUNTER.getQuery()));
+                update_user_counter.setInt(1, resultSet.getInt("count_time") + 1);
+                update_user_counter.setString(2, name);
+                update_user_counter.execute();
+            } else {
+                PreparedStatement add_user = connection.prepareStatement(String.valueOf(SqlQueries.INSERT_NAME_SQL.getQuery()));
+                add_user.setString(1, name);
+                add_user.setInt(2, 1);
+                add_user.execute();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
     public List<String> getNames() throws SQLException {
@@ -71,7 +71,8 @@ public class GreetingsDbMethods implements GreetingsInterface {
 
     @Override
     public String greet(String name, Language language) {
-        return null;
+//        return null;
+        return name;
     }
 
     @Override
