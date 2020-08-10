@@ -38,28 +38,6 @@ public class App {
             AppStater appStater = new AppStater(getConnectionFromDb());
             port(getHerokuAssignedPort());
 
-
-//            get("/hello", (request, response) -> {
-//                Map<String, Object> map = new HashMap<>();
-//                map.put("users", methods.getUsers());
-//                map.put("counter", manager.getCount());
-//                return new ModelAndView(map, "hello.handlebars");
-//            }, new HandlebarsTemplateEngine());
-//
-//            post("/hello", (request, response) -> {
-//                Map<String, Object> map = new HashMap<>();
-//
-//                map.put("greeting", manager.getGreeting());
-//                map.put("users", manager.getUsers());
-//                map.put("counter", manager.getCount());
-//                return new ModelAndView(map, "hello.handlebars");
-//            }, new HandlebarsTemplateEngine());
-//
-//            get("/greeted/:username", (request, response) -> {
-//                Map<String, Object> map = new HashMap<>();
-//                return new ModelAndView(map, "greeted.handlebars");
-//            }, new HandlebarsTemplateEngine());
-
             get("/api/greet/greeted/names", api.greeted_names());
             post("/api/greetings/greet", api.greet_user(), new Serializer());
             get("/api/greetings/language", api.showLanguages(), new Serializer());
