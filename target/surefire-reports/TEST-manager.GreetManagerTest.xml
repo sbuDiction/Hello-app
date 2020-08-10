@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="manager.GreetManagerTest" time="0.488" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="manager.GreetManagerTest" time="0.464" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="14"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ZA"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-14-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/codex/Documents/Projects/Hello-app/target/surefire/surefirebooter6375210346919559016.jar /home/codex/Documents/Projects/Hello-app/target/surefire 2020-08-10T22-39-40_026-jvmRun1 surefire14973081885681876498tmp surefire_016031626827012798923tmp"/>
+    <property name="sun.java.command" value="/home/codex/Documents/Projects/Hello-app/target/surefire/surefirebooter14184629377851016291.jar /home/codex/Documents/Projects/Hello-app/target/surefire 2020-08-10T22-56-55_687-jvmRun1 surefire17486329974218144465tmp surefire_015133564410636393049tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/codex/Documents/Projects/Hello-app/target/test-classes:/home/codex/Documents/Projects/Hello-app/target/classes:/home/codex/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar:/home/codex/.m2/repository/org/slf4j/slf4j-simple/1.7.21/slf4j-simple-1.7.21.jar:/home/codex/.m2/repository/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar:/home/codex/.m2/repository/com/sparkjava/spark-core/2.9.1/spark-core-2.9.1.jar:/home/codex/.m2/repository/org/eclipse/jetty/jetty-server/9.4.18.v20190429/jetty-server-9.4.18.v20190429.jar:/home/codex/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar:/home/codex/.m2/repository/org/eclipse/jetty/jetty-http/9.4.18.v20190429/jetty-http-9.4.18.v20190429.jar:/home/codex/.m2/repository/org/eclipse/jetty/jetty-util/9.4.18.v20190429/jetty-util-9.4.18.v20190429.jar:/home/codex/.m2/repository/org/eclipse/jetty/jetty-io/9.4.18.v20190429/jetty-io-9.4.18.v20190429.jar:/home/codex/.m2/repository/org/eclipse/jetty/jetty-webapp/9.4.18.v20190429/jetty-webapp-9.4.18.v20190429.jar:/home/codex/.m2/repository/org/eclipse/jetty/jetty-xml/9.4.18.v20190429/jetty-xml-9.4.18.v20190429.jar:/home/codex/.m2/repository/org/eclipse/jetty/jetty-servlet/9.4.18.v20190429/jetty-servlet-9.4.18.v20190429.jar:/home/codex/.m2/repository/org/eclipse/jetty/jetty-security/9.4.18.v20190429/jetty-security-9.4.18.v20190429.jar:/home/codex/.m2/repository/org/eclipse/jetty/websocket/websocket-server/9.4.18.v20190429/websocket-server-9.4.18.v20190429.jar:/home/codex/.m2/repository/org/eclipse/jetty/websocket/websocket-common/9.4.18.v20190429/websocket-common-9.4.18.v20190429.jar:/home/codex/.m2/repository/org/eclipse/jetty/websocket/websocket-client/9.4.18.v20190429/websocket-client-9.4.18.v20190429.jar:/home/codex/.m2/repository/org/eclipse/jetty/jetty-client/9.4.18.v20190429/jetty-client-9.4.18.v20190429.jar:/home/codex/.m2/repository/org/eclipse/jetty/websocket/websocket-servlet/9.4.18.v20190429/websocket-servlet-9.4.18.v20190429.jar:/home/codex/.m2/repository/org/eclipse/jetty/websocket/websocket-api/9.4.18.v20190429/websocket-api-9.4.18.v20190429.jar:/home/codex/.m2/repository/com/sparkjava/spark-template-handlebars/2.7.1/spark-template-handlebars-2.7.1.jar:/home/codex/.m2/repository/com/github/jknack/handlebars/4.0.6/handlebars-4.0.6.jar:/home/codex/.m2/repository/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar:/home/codex/.m2/repository/org/antlr/antlr4-runtime/4.5.1-1/antlr4-runtime-4.5.1-1.jar:/home/codex/.m2/repository/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar:/home/codex/.m2/repository/com/github/jknack/handlebars-guava-cache/4.0.6/handlebars-guava-cache-4.0.6.jar:/home/codex/.m2/repository/com/google/guava/guava/14.0.1/guava-14.0.1.jar:/home/codex/.m2/repository/com/h2database/h2/1.4.199/h2-1.4.199.jar:/home/codex/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.4.0/junit-jupiter-engine-5.4.0.jar:/home/codex/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/home/codex/.m2/repository/org/junit/platform/junit-platform-engine/1.4.0/junit-platform-engine-1.4.0.jar:/home/codex/.m2/repository/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar:/home/codex/.m2/repository/org/junit/platform/junit-platform-commons/1.4.0/junit-platform-commons-1.4.0.jar:/home/codex/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.4.0/junit-jupiter-api-5.4.0.jar:/home/codex/.m2/repository/junit/junit/4.12/junit-4.12.jar:/home/codex/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/codex/.m2/repository/org/jdbi/jdbi3-core/3.1.0/jdbi3-core-3.1.0.jar:/home/codex/.m2/repository/org/antlr/antlr-runtime/3.4/antlr-runtime-3.4.jar:/home/codex/.m2/repository/org/antlr/stringtemplate/3.2.1/stringtemplate-3.2.1.jar:/home/codex/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar:/home/codex/.m2/repository/net/jodah/expiringmap/0.5.6/expiringmap-0.5.6.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/home/codex/Documents/Projects/Hello-app/target/surefire/surefirebooter6375210346919559016.jar"/>
+    <property name="surefire.real.class.path" value="/home/codex/Documents/Projects/Hello-app/target/surefire/surefirebooter14184629377851016291.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="14.0.1+7-Ubuntu-1ubuntu1"/>
     <property name="user.name" value="codex"/>
@@ -50,8 +50,8 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="58.0"/>
   </properties>
-  <testcase name="greetingLanguageTest" classname="manager.GreetManagerTest" time="0.287"/>
-  <testcase name="greetingCounterTest" classname="manager.GreetManagerTest" time="0.034"/>
-  <testcase name="greetingNamesDuplicateTest" classname="manager.GreetManagerTest" time="0.057"/>
-  <testcase name="getAllTheNamesGreeted" classname="manager.GreetManagerTest" time="0.097"/>
+  <testcase name="greetingLanguageTest" classname="manager.GreetManagerTest" time="0.257"/>
+  <testcase name="greetingCounterTest" classname="manager.GreetManagerTest" time="0.041"/>
+  <testcase name="greetingNamesDuplicateTest" classname="manager.GreetManagerTest" time="0.119"/>
+  <testcase name="getAllTheNamesGreeted" classname="manager.GreetManagerTest" time="0.027"/>
 </testsuite>

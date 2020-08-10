@@ -19,7 +19,7 @@ public class GreetingsApi {
         this.manager = manager;
         this.greetingsDbMethods = greetingsDbMethods;
     }
-    
+
     public Route greeted_names() {
         return this::handle2;
     }

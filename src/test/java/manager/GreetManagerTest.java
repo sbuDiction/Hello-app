@@ -65,8 +65,8 @@ public class GreetManagerTest {
             cleanUpTables();
             GreetManager manager = new GreetManager();
             GreetingsDbMethods greetingsDbMethods = new GreetingsDbMethods(getConnection());
-            manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
-            String greetings = manager.getGreetings();
+            
+            String greetings = manager.greet("Vusimuzi", new Greetings("Vusimuzi", Language.valueOf("FRENCH")).getLanguage());
             assertEquals(greetings, "Bonjour, Vusimuzi");
 
         } catch (Exception e) {
