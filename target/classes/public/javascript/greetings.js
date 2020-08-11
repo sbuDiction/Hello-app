@@ -26,10 +26,10 @@ const get_names = () => {
     axios.get('/api/greet/greeted/names')
         .then((response) => {
             let userName = response.data
-            console.log(response.data);
-            let api_call = [];
+            // console.log(response.data);
+            // let api_call = [];
             // api_call.push({ name: response,id:response,counter })
-            console.log(api_call);
+            // console.log(api_call);
 
             let showHtml = greetedNamesCompiler({ names: userName });
             pageContent.innerHTML = showHtml;
