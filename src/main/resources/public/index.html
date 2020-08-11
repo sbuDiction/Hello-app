@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Web Dev WorkShop</title>
+    <title>Greetings-with-spark</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" rel="stylesheet" />
@@ -24,41 +24,44 @@
 </style>
 
 <script type='text/template' class="greetedNames">
-    <h2 style="color:rgb(175, 7, 7);padding-left: 30%;" class="ui header">Greeted people</h2>
-    <div class="ui small horizontal list">
-        <div class="item">
-          <img class="ui avatar image" src="./images/joe.jpg">
-          <div class="content">
-            <div class="header">Helen</div>
-            greeted 4
-          </div>
-        </div>
-        <div class="item">
-          <img class="ui avatar image" src="./images/joe.jpg">
-          <div class="content">
-            <div class="header">Christian</div>
-            greeted 2
-          </div>
-        </div>
-        <div class="item">
-          <img class="ui avatar image" src="./images/joe.jpg">
-          <div class="content">
-            <div class="header">Daniel</div>
-            greeted 10
-          </div>
-        </div>
-      </div>
+    <!-- content -->
+<h2 style="color:rgb(175, 7, 7);padding-left: 30%;" class="ui header">Greeted people</h2>
+<div>
+    <table class="ui very basic collapsing celled table">
+        <thead>
+            <tr>
+                <th>User Names</th>
+                <th>Greeted Counter</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each names}}
+            <tr>
+                <td>
+                    <h4 class="ui image header">
+                        <img src="./images/joe.jpg" class="ui mini rounded image">
+                        <div class="content">
+                            {{this.name}}
+                            <div class="sub header">User
+                            </div>
+                        </div>
+                    </h4>
+                </td>
+                <td>
+                    {{this.counter}}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
 </script>
-
-<!-- <script type='text/template' class="greetingMessage">
-    <h2 style="color:rgb(175, 7, 7);padding-left: 30%;" class="ui header">Greeted people</h2>
-    <p style="color:rgb(175, 7, 7);padding-left: 30%;">{{greetings}}</p>
-</script> -->
 
 <script type='text/template' class="greetingsHomePage">
     <h2 style="color:rgb(175, 7, 7);padding-left: 30%;" class="ui header">Greetings application</h2>
     <div>
-        <h2 style="padding-left: 33%;">{{greetings}}</h2>
+        <div class="greetings" style="padding-left: 33%;">
+        </div>
             <div class="ui  inverted dimmer">
                 <div class="ui mini text loader">Fetching information please wait...</div>
             </div>
@@ -71,7 +74,13 @@
     </div>
 </script>
 
+<script type='text/template' class="message">
+    <h2 style="padding-left: 33%;color:rgb(175, 7, 7)">{{ greetings }}</h2>
+</script>
+
 <body>
+
+
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -129,9 +138,13 @@
         <div style="padding-top: 10%;">
             <div class="ui raised very padded text container segment greetingsMain">
                 <!-- display content -->
-
+                <!-- <p>Hello, sbu</p> -->
             </div>
         </div>
+
+
+
+
 
 
     </div>
@@ -139,6 +152,8 @@
         <div class="ui mini text loader">Setting up please wait..</div>
     </div>
     </div>
+
+
 
 
 

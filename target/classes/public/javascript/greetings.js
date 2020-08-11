@@ -9,7 +9,7 @@ let dropdownCompiler = Handlebars.compile(dropdown);
 let dropdownData = document.querySelector('.languageDrop');
 
 const pageContent = document.querySelector('.greetingsMain');
-
+const displayPhrase = document.querySelector('.greetins');
 
 
 const greetedNames = document.querySelector('.greetedNames');
@@ -18,14 +18,18 @@ const greetedNamesCompiler = Handlebars.compile(greetedNames.innerHTML);
 const home = document.querySelector('.greetingsHomePage');
 const homeCompiler = Handlebars.compile(home.innerHTML);
 
-// const greetingMessage = document.querySelector('.greetingMessage');
-// const greetMsgCompiler = Handlebars.compile(greetingMessage.innerHTML);
+const greetingMessage = document.querySelector('.message');
+const greetMsgCompiler = Handlebars.compile(greetingMessage.innerHTML);
+
 
 const get_names = () => {
     axios.get('/api/greet/greeted/names')
         .then((response) => {
             let userName = response.data
             console.log(response.data);
+            let api_call = [];
+            // api_call.push({ name: response,id:response,counter })
+            console.log(api_call);
 
             let showHtml = greetedNamesCompiler({ names: userName });
             pageContent.innerHTML = showHtml;
@@ -54,36 +58,30 @@ const get_language = () => {
 }
 
 async function greet() {
-
-    // const greetMsgCompiler = Handlebars.compile(greetingsMessage.innerHTML);
     let userName = nameInput.value;
     let languageSelected = language.value;
 
     let params = {
         "userName": userName,
-        "language": languageSelected
+        "language": languageSelected,
+        "timeStamp": new Date()
     }
+
+    console.log(params);
+
 
     await axios.post('/api/greetings/greet', params)
         .then((results) => {
-            // let displayCount = homeCompiler({ greetings: results.data });
-            // pageContent.innerHTML = displayHtml;
-
-            // const greetingMessage = document.querySelector('.greetingMessage');
-            // const greetMsgCompiler = Handlebars.compile(greetingMessage.innerHTML);
-
-            // console.log(greetingMessage);
 
 
-            // let displayGreetings = homeCompiler({ greetings: results.data })
-            // console.log(displayGreetings);
-
-            // pageContent.innerHTML = displayGreetings;
-            get_counter();
+            let displayGreetings = greetMsgCompiler({ greetings: results.data })
+            pageContent.innerHTML = displayGreetings;
+            setTimeout(() => {
+                buildHomePage()
+                get_counter()
+            }, 2000)
         })
 }
-
-// get_counter();
 
 window.onload = () => {
     window.location.href = '/#/home/';
@@ -123,16 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 greetButton.addEventListener('click', () => {
-    // greet()
-    console.log(greet());
-
+    greet()
 })
 
 const buildHomePage = () => {
     // const greetingsMessage = document.querySelector('.greetingMessage');
     // const greetMsgCompiler = Handlebars.compile(greetingsMessage.innerHTML);
+
     let html = homeCompiler();
     pageContent.innerHTML = html;
+
     get_counter();
+
 }
 buildHomePage();

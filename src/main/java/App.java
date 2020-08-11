@@ -7,7 +7,9 @@ import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.time.LocalDate;
 
 import static spark.Spark.*;
 
@@ -37,6 +39,9 @@ public class App {
             GreetingsApi api = new GreetingsApi(manager, methods);
             AppStater appStater = new AppStater(getConnectionFromDb());
             port(getHerokuAssignedPort());
+
+//            LocalDate currentTime = LocalDate.now();
+//            Date date = Date.from( 11 2020 11:24:17)
 
             get("/api/greet/greeted/names", api.greeted_names());
             post("/api/greetings/greet", api.greet_user(), new Serializer());

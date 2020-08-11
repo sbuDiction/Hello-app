@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GreetingsDbMethods implements GreetingsInterface {
@@ -32,6 +33,7 @@ public class GreetingsDbMethods implements GreetingsInterface {
                 PreparedStatement add_user = connection.prepareStatement(String.valueOf(SqlQueries.INSERT_NAME_SQL.getQuery()));
                 add_user.setString(1, name);
                 add_user.setInt(2, 1);
+//                add_user.setInt(new Date());
                 add_user.execute();
             }
         } catch (Exception e) {
@@ -48,7 +50,9 @@ public class GreetingsDbMethods implements GreetingsInterface {
             greetedList.add(new Serializer()
                     .fromObjectToJson(new People(resultSet.getInt("id"),
                             resultSet.getString("name"),
-                            resultSet.getInt("count_time"))));
+                            resultSet.getInt("count_time")
+
+                    )));
         }
         return greetedList;
     }
