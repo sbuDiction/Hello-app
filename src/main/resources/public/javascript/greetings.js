@@ -38,6 +38,9 @@ const get_names = () => {
     axios.get('/api/greet/greeted/names')
         .then((response) => {
             let userName = response.data
+            console.log(response);
+            
+            let time = new Date().valueOf()
             let showHtml = greetedNamesCompiler({ names: userName });
             pageContent.innerHTML = showHtml;
         })
@@ -83,6 +86,7 @@ window.onhashchange = () => {
     if (url[1] === 'home') {
         get_counter();
     } else if (url[1] === 'greeted') {
+        
         get_names();
     }
 }
