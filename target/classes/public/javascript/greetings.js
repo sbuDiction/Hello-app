@@ -1,6 +1,7 @@
 let nameInput = document.querySelector('.name');
 let language = document.querySelector('.language');
 let greetButton = document.querySelector('.greet');
+const greetingBox = document.querySelector('.content');
 
 
 let dropdown = document.querySelector('.dropdownLanguage').innerHTML;
@@ -20,6 +21,7 @@ const homeCompiler = Handlebars.compile(home.innerHTML);
 const greetingMessage = document.querySelector('.message');
 const greetMsgCompiler = Handlebars.compile(greetingMessage.innerHTML);
 
+
 const get_counter = () => {
     axios.get('/api/greetings/counter')
         .then((response) => {
@@ -35,14 +37,23 @@ const buildHomePage = () => {
 }
 
 const get_names = () => {
-    axios.get('/api/greet/greeted/names')
+    axios.get('/api/greet/greeted/names', { api_call_time: new Date().getTime() })
         .then((response) => {
-            let userName = response.data
-            console.log(response);
-            
-            let time = new Date().valueOf()
+
+            let userName = response.data;
             let showHtml = greetedNamesCompiler({ names: userName });
             pageContent.innerHTML = showHtml;
+            const loader = document.getElementById('tableLoader');
+
+            if (response) {
+                greetingBox.classList.add('hide')
+                loader.classList.add('active');
+            } if (response.status === 200) {
+                setTimeout(() => {
+                    loader.classList.remove('active');
+                    greetingBox.classList.remove('hide');
+                }, onLoadEventHandler(response.config.api_call_time))
+            }
         })
 }
 
@@ -82,19 +93,16 @@ window.onload = () => {
 window.onhashchange = () => {
     let hash = location.hash;
     let url = hash.split('/');
-    get_counter();
-    if (url[1] === 'home') {
-        get_counter();
-    } else if (url[1] === 'greeted') {
-        
+    if (url[1] === 'greeted') {
         get_names();
+    } else if (url[1] === 'home') {
+        get_counter();
     }
 }
 
-let startTime = new Date().getTime();
-const onLoadEventHandler = () => {
-    let latency = new Date().getTime() - startTime;
-    return latency;
+let pageLoadingTime = new Date().getTime();
+const onLoadEventHandler = (time) => {
+    return new Date().getTime() - time;
 }
 
 
@@ -102,7 +110,7 @@ $(document).ready(function () {
     $('.ui.dropdown').dropdown();
     setTimeout(function () {
         $('#dimm').hide();
-    }, onLoadEventHandler)
+    }, onLoadEventHandler(pageLoadingTime))
 
     $(document).ready(function () {
         $('.ui.accordion').accordion();

@@ -21,14 +21,17 @@
         background-size: 40%;
         background-position: center;
     }
+
+    .hide {
+        display: none;
+    }
 </style>
 
 <script type='text/template' class="greetedNames">
     <!-- content -->
+
 <h2 style="color:rgb(175, 7, 7);padding-left: 30%;" class="ui header">Greeted people</h2>
-<div class="ui  inverted active dimmer">
-    <div class="ui mini text loader">Fetching information please wait...</div>
-</div>
+
 <div>
     <table class="ui very basic collapsing celled table">
         <thead>
@@ -138,10 +141,13 @@
             </div>
         </div>
 
-        <div style="padding-top: 10%;">
+        <div id="tableLoader" class="ui inverted dimmer">
+            <div class="ui mini text loader">Please wait...</div>
+        </div>
+        <div class="content" style="padding-top: 10%;">
             <div class="ui raised very padded text container segment greetingsMain">
                 <!-- display content -->
-                
+
             </div>
         </div>
 
