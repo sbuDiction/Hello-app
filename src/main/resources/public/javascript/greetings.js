@@ -2,6 +2,8 @@ let nameInput = document.querySelector('.name');
 let language = document.querySelector('.language');
 let greetButton = document.querySelector('.greet');
 const greetingBox = document.querySelector('.content');
+const homeUrl = document.querySelector('.homeUrl');
+const greetedUrl = document.querySelector('.greetedUrl');
 
 
 let dropdown = document.querySelector('.dropdownLanguage').innerHTML;
@@ -94,8 +96,12 @@ window.onhashchange = () => {
     let hash = location.hash;
     let url = hash.split('/');
     if (url[1] === 'greeted') {
+        homeUrl.classList.remove('active');
+        greetedUrl.classList.add('active');
         get_names();
     } else if (url[1] === 'home') {
+        homeUrl.classList.add('active');
+        greetedUrl.classList.remove('active');
         get_counter();
     }
 }
