@@ -41,6 +41,7 @@ public class App {
             get("/api/greet/greeted/names", api.greeted_names());
             post("/api/greetings/greet", api.greet_user(), new Serializer());
             get("/api/greetings/language", api.showLanguages(), new Serializer());
+            get("/api/greetings/counter", api.get_counter());
 //            get("/manager.api/greetings/message", manager.api.getGreetingMessage());
 
         } catch (Exception e) {

@@ -28,7 +28,6 @@ public class GreetingsApi {
         return greetingsDbMethods.getNames();
     }
 
-    //
     public Route showLanguages() {
         return (request, response) -> manager.getLanguageList();
     }
@@ -37,11 +36,15 @@ public class GreetingsApi {
         return this::handle;
     }
 
-    private Object handle(Request request, Response response) throws SQLException {
+    private Object handle(Request request, Response response) {
         response.type("application/json");
         Deserializer deserializer = new Gson().fromJson(request.body(), Deserializer.class);
         System.out.println(manager.greet(deserializer.getUserName(), Language.valueOf(deserializer.getLanguage())) + " this one");
         greetingsDbMethods.checkNameDuplicate(manager.addName(deserializer.getUserName()));
         return manager.greet(deserializer.getUserName(), Language.valueOf(deserializer.getLanguage()));
+    }
+
+    public Route get_counter(){
+        return (request, response) -> greetingsDbMethods.getCount();
     }
 }
