@@ -92,9 +92,9 @@ public class GreetManagerTest {
             greetingsDbMethods.checkNameDuplicate(manager.addName("vusimuzi"));
             greetingsDbMethods.checkNameDuplicate(manager.addName("vusimuzi"));
             GreetingsDbMethods methods = new GreetingsDbMethods(getConnection());
-            List<String> list = methods.getNames();
+            List<String> list = methods.getNames(0,100);
             System.out.println(list);
-            assertEquals(methods.getNames().size(), 1);
+            assertEquals(methods.getNames(0,100).size(), 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,9 +116,9 @@ public class GreetManagerTest {
             greetingsDbMethods.checkNameDuplicate(manager.addName("jobe"));
             greetingsDbMethods.checkNameDuplicate(manager.addName("khumalo"));
             greetingsDbMethods.checkNameDuplicate(manager.addName("vusimuzi"));
-            List<String> list = new GreetingsDbMethods(getConnection()).getNames();
+            List<String> list = new GreetingsDbMethods(getConnection()).getNames(0,100);
             System.out.println(list);
-            assertEquals(greetingsDbMethods.getNames().size(), 5);
+            assertEquals(greetingsDbMethods.getNames(0,100).size(), 5);
         } catch (Exception e) {
             e.printStackTrace();
         }

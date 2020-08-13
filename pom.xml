@@ -21,7 +21,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>6.3.3</version>
                 <configuration>
-                    <url>jdbc:h2:file:./manager.greetings</url>
+                    <url>jdbc:h2:file:./greetings</url>
                     <user>sa</user>
                     <password></password>
                 </configuration>

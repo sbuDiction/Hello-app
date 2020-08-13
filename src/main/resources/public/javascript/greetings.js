@@ -1,14 +1,14 @@
-let nameInput = document.querySelector('.name');
-let language = document.querySelector('.language');
-let greetButton = document.querySelector('.greet');
+const nameInput = document.querySelector('.name');
+const language = document.querySelector('.language');
+const greetButton = document.querySelector('.greet');
 const greetingBox = document.querySelector('.content');
 const homeUrl = document.querySelector('.homeUrl');
 const greetedUrl = document.querySelector('.greetedUrl');
 
 
-let dropdown = document.querySelector('.dropdownLanguage').innerHTML;
-let dropdownCompiler = Handlebars.compile(dropdown);
-let dropdownData = document.querySelector('.languageDrop');
+const dropdown = document.querySelector('.dropdownLanguage').innerHTML;
+const dropdownCompiler = Handlebars.compile(dropdown);
+const dropdownData = document.querySelector('.languageDrop');
 
 const pageContent = document.querySelector('.greetingsMain');
 const displayPhrase = document.querySelector('.greetins');
@@ -41,8 +41,8 @@ const buildHomePage = () => {
 const get_names = () => {
     axios.get('/api/greet/greeted/names', { api_call_time: new Date().getTime() })
         .then((response) => {
-
             let userName = response.data;
+
             let showHtml = greetedNamesCompiler({ names: userName });
             pageContent.innerHTML = showHtml;
             const loader = document.getElementById('tableLoader');
@@ -68,13 +68,12 @@ const get_language = () => {
         })
 }
 
-async function greet() {
+const greet = async () => {
     let userName = nameInput.value;
     let languageSelected = language.value;
     let params = {
         "userName": userName,
         "language": languageSelected,
-        // "timeStamp": new Date()
     }
 
     await axios.post('/api/greetings/greet', params)
@@ -112,13 +111,13 @@ const onLoadEventHandler = (time) => {
 }
 
 
-$(document).ready(function () {
+$(document).ready(() => {
     $('.ui.dropdown').dropdown();
     setTimeout(function () {
         $('#dimm').hide();
     }, onLoadEventHandler(pageLoadingTime))
 
-    $(document).ready(function () {
+    $(document).ready(() => {
         $('.ui.accordion').accordion();
     });
     get_language();
@@ -128,5 +127,13 @@ $(document).ready(function () {
 greetButton.addEventListener('click', () => {
     greet()
 })
+
+// Handlebars.registerHelper('namesNotFound', () => {
+//     console.log(counter === 0);
+
+//     if (counter === 1) {
+//         return true;
+//     }
+// })
 
 

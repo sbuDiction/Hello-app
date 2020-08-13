@@ -42,6 +42,8 @@
         </thead>
         <tbody>
             {{#each names}}
+            <!-- <h4 style="color:rgb(175, 7, 7);padding-left: 30%;" class="ui header">Sorry no people have been greeted yet -->
+            <!-- </h4> -->
             <tr>
                 <td>
                     <h4 class="ui image header">
@@ -60,6 +62,18 @@
             {{/each}}
         </tbody>
     </table>
+    <!-- <nav aria-label="...">
+        <ul class="pagination pagination-lg">
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">
+                    1
+                    <span class="sr-only">(current)</span>  
+                </span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+        </ul>
+    </nav> -->
 </div>
 </script>
 
@@ -114,7 +128,7 @@
         <div class="row">
             <div class="col-sm">
                 <div class="ui icon input">
-                    <input class="name" style="color: rgb(175, 7, 7);" type="text" placeholder="Enter name...">
+                    <input class="name" style="color: rgb(175, 7, 7);" type="text" placeholder="Enter name..." required>
                     <i class="inverted circular  link icon"></i>
                 </div>
             </div>
@@ -122,7 +136,7 @@
             <div class="col-sm">
                 <div class="field">
                     <div class="ui selection dropdown">
-                        <input class="language" type="hidden" name="gender">
+                        <input class="language" type="hidden" name="gender" required>
                         <i class="dropdown icon"></i>
                         <div style="color: rgb(175, 7, 7);" class="default text">Language</div>
                         <div class="menu languageDrop">

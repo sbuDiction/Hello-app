@@ -25,7 +25,7 @@ public class GreetingsApi {
     }
 
     private Object handle2(Request request, Response response) throws SQLException {
-        return greetingsDbMethods.getNames();
+        return greetingsDbMethods.getNames(0,3);
     }
 
     public Route showLanguages() {
@@ -39,7 +39,6 @@ public class GreetingsApi {
     private Object handle(Request request, Response response) {
         response.type("application/json");
         Deserializer deserializer = new Gson().fromJson(request.body(), Deserializer.class);
-        System.out.println(manager.greet(deserializer.getUserName(), Language.valueOf(deserializer.getLanguage())) + " this one");
         greetingsDbMethods.checkNameDuplicate(manager.addName(deserializer.getUserName()));
         return manager.greet(deserializer.getUserName(), Language.valueOf(deserializer.getLanguage()));
     }

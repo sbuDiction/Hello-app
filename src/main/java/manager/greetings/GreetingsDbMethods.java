@@ -23,7 +23,6 @@ public class GreetingsDbMethods implements GreetingsInterface {
             PreparedStatement find_user = connection.prepareStatement(String.valueOf(SqlQueries.FIND_NAME_SQL.getQuery()));
             find_user.setString(1, name);
             ResultSet resultSet = find_user.executeQuery();
-//            System.out.println(!resultSet.next());
             if (resultSet.next()) {
                 PreparedStatement update_user_counter = connection.prepareStatement(String.valueOf(SqlQueries.UPDATE_USER_COUNTER.getQuery()));
                 update_user_counter.setInt(1, resultSet.getInt("count_time") + 1);
@@ -42,18 +41,22 @@ public class GreetingsDbMethods implements GreetingsInterface {
 
     }
 
-    public List<String> getNames() throws SQLException {
+    public List<String> getNames(int offset, int next) throws SQLException {
         List<String> greetedList = new ArrayList<String>();
         PreparedStatement get_all_the_content = connection.prepareStatement(String.valueOf(SqlQueries.GET_NAMES.getQuery()));
+        get_all_the_content.setInt(1, offset);
+        get_all_the_content.setInt(2, next);
         ResultSet resultSet = get_all_the_content.executeQuery();
+
+        System.out.println(resultSet.getMetaData());
         while (resultSet.next()) {
             greetedList.add(new Serializer()
                     .fromObjectToJson(new People(resultSet.getInt("id"),
                             resultSet.getString("name"),
                             resultSet.getInt("count_time")
-
                     )));
         }
+        System.out.println(greetedList);
         return greetedList;
     }
 

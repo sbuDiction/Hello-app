@@ -14,6 +14,8 @@ import java.time.LocalDate;
 import static spark.Spark.*;
 
 public class App {
+
+
     static public int getHerokuAssignedPort() {
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
@@ -23,10 +25,7 @@ public class App {
     }
 
     static public Connection getConnectionFromDb() throws Exception {
-        String dbDiskURL = "jdbc:h2:file:./greetings_db";
-        Jdbi jdbi = Jdbi.create(dbDiskURL, "sa", "");
-        Handle handle = jdbi.open();
-        handle.execute("create table if not exists greetings ( id integer identity, name text not null, count_time int )");
+        String dbDiskURL = "jdbc:h2:file:./greetings";
         return DriverManager.getConnection(dbDiskURL, "sa", "");
     }
 
@@ -40,14 +39,11 @@ public class App {
             AppStater appStater = new AppStater(getConnectionFromDb());
             port(getHerokuAssignedPort());
 
-//            LocalDate currentTime = LocalDate.now();
-//            Date date = Date.from( 11 2020 11:24:17)
 
             get("/api/greet/greeted/names", api.greeted_names());
             post("/api/greetings/greet", api.greet_user(), new Serializer());
             get("/api/greetings/language", api.showLanguages(), new Serializer());
             get("/api/greetings/counter", api.get_counter());
-//            get("/manager.api/greetings/message", manager.api.getGreetingMessage());
 
         } catch (Exception e) {
             e.printStackTrace();
