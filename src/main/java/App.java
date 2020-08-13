@@ -25,7 +25,10 @@ public class App {
     }
 
     static public Connection getConnectionFromDb() throws Exception {
-        String dbDiskURL = "jdbc:h2:file:./greetings";
+        String dbDiskURL = "jdbc:h2:file:./greetings_db";
+        Jdbi jdbi = Jdbi.create(dbDiskURL, "sa", "");
+        Handle handle = jdbi.open();
+        handle.execute("create table if not exists greetings ( id integer identity, name text not null, count_time int )");
         return DriverManager.getConnection(dbDiskURL, "sa", "");
     }
 
