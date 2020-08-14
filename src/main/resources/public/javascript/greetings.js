@@ -23,6 +23,10 @@ const homeCompiler = Handlebars.compile(home.innerHTML);
 const greetingMessage = document.querySelector('.message');
 const greetMsgCompiler = Handlebars.compile(greetingMessage.innerHTML);
 
+const pagingTemplate = document.querySelector('.paging');
+const pagingCompiler = Handlebars.compile(pagingTemplate.innerHTML);
+
+
 
 const get_counter = () => {
     axios.get('/api/greetings/counter')
@@ -38,26 +42,56 @@ const buildHomePage = () => {
     get_counter();
 }
 
+const sortPagination = (rowsCount) => {
+    return Math.ceil(rowsCount / 3);
+}
+
 const get_names = () => {
     axios.get('/api/greeted/names', { api_call_time: new Date().getTime() })
         .then((response) => {
             let userName = response.data;
+            console.log(response);
+            
+            let rowsCount = 0;
 
             let showHtml = greetedNamesCompiler({ names: userName });
             pageContent.innerHTML = showHtml;
             const loader = document.getElementById('tableLoader');
+            const page = document.querySelector('.pagerContent');
+
+
+            for (let x = 0; x < userName.length; x++) {
+                const element = userName[0].rowsCount;
+                rowsCount = element
+            }
+
+            if (rowsCount !== 0) {
+                let numbersArray = []
+                for (let pages = 0; pages < sortPagination(rowsCount); pages++) {
+                    const element = pages;
+                    numbersArray.push(element)
+
+                    let displayPegination = pagingCompiler({ pagination: numbersArray });
+                    page.innerHTML = displayPegination;
+                }
+                console.log(numbersArray, "Numbers array");
+            }
+
+
 
             if (response) {
-                greetingBox.classList.add('hide')
+                greetingBox.classList.add('hide');
                 loader.classList.add('active');
             } if (response.status === 200) {
                 setTimeout(() => {
                     loader.classList.remove('active');
                     greetingBox.classList.remove('hide');
-                }, onLoadEventHandler(response.config.api_call_time))
+                }, onLoadEventHandler(response.config.api_call_time));
             }
+
         })
 }
+
 
 const get_language = () => {
     axios.get('/api/greetings/language')
@@ -94,6 +128,7 @@ window.onload = () => {
 window.onhashchange = () => {
     let hash = location.hash;
     let url = hash.split('/');
+    console.log(url[1]);
     if (url[1] === 'greeted') {
         homeUrl.classList.remove('active');
         greetedUrl.classList.add('active');
@@ -128,10 +163,8 @@ greetButton.addEventListener('click', () => {
     greet()
 })
 
-// Handlebars.registerHelper('namesNotFound', () => {
-//     console.log(counter === 0);
-
-//     if (counter === 1) {
+// Handlebars.registerHelper('pagination', () => {
+//     if (rowsCount === 0) {
 //         return true;
 //     }
 // })

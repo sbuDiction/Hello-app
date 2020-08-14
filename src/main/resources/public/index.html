@@ -62,18 +62,10 @@
             {{/each}}
         </tbody>
     </table>
-    <!-- <nav aria-label="...">
-        <ul class="pagination pagination-lg">
-            <li class="page-item active" aria-current="page">
-                <span class="page-link">
-                    1
-                    <span class="sr-only">(current)</span>  
-                </span>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-        </ul>
-    </nav> -->
+
+    <div class="pagerContent">
+
+    </div>
 </div>
 </script>
 
@@ -98,9 +90,31 @@
     <h2 style="padding-left: 33%;color:rgb(175, 7, 7)">{{ greetings }}</h2>
 </script>
 
+<script type='text/template' class="paging">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            {{#pagination}}
+            <li class="page-item"><a class="page-link" href="?offset={{this}}">{{this}}</a></li>
+            {{/pagination}}
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</script>
+
 <body>
 
-
+    <!-- <li class="page-item"><a class="page-link" href=""></a></li> -->
     <div class="container">
         <div class="row">
             <div class="col-12">

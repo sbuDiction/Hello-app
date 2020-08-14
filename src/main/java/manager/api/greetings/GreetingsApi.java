@@ -27,7 +27,7 @@ public class GreetingsApi {
     private Object handle2(Request request, Response response) throws SQLException {
         String offset = request.queryParams("offset");
         System.out.println(offset);
-        return greetingsDbMethods.getNames(offset != null ? Integer.parseInt(offset) : 1);
+        return greetingsDbMethods.getNames(offset != null ? Integer.parseInt(offset) : 0);
     }
 
     public Route showLanguages() {

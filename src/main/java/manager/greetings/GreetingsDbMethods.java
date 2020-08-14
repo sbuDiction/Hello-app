@@ -1,7 +1,9 @@
 package manager.greetings;
 
+import com.google.gson.JsonObject;
 import jsonserialization.Serializer;
 import manager.languages.Language;
+import org.json.JSONObject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +34,6 @@ public class GreetingsDbMethods implements GreetingsInterface {
                 PreparedStatement add_user = connection.prepareStatement(String.valueOf(SqlQueries.INSERT_NAME_SQL.getQuery()));
                 add_user.setString(1, name);
                 add_user.setInt(2, 1);
-//                add_user.setInt(new Date());
                 add_user.execute();
             }
         } catch (Exception e) {
@@ -42,18 +43,18 @@ public class GreetingsDbMethods implements GreetingsInterface {
     }
 
     public List<String> getNames(int offset) throws SQLException {
-        List<String> greetedList = new ArrayList<String>();
-        PreparedStatement get_all_the_content = connection.prepareStatement(String.valueOf(SqlQueries.GET_NAMES.getQuery()));
+        List<String> greetedList = new ArrayList<>();
+        PreparedStatement get_all_the_content = connection.prepareStatement(SqlQueries.GET_NAMES.getQuery());
         get_all_the_content.setInt(1, offset);
-//        get_all_the_content.setInt(2, next);
         ResultSet resultSet = get_all_the_content.executeQuery();
 
-        System.out.println(resultSet.getMetaData());
+
         while (resultSet.next()) {
             greetedList.add(new Serializer()
                     .fromObjectToJson(new People(resultSet.getInt("id"),
                             resultSet.getString("name"),
-                            resultSet.getInt("count_time")
+                            resultSet.getInt("count_time"),
+                            getCount()
                     )));
         }
         System.out.println(greetedList);
@@ -78,7 +79,6 @@ public class GreetingsDbMethods implements GreetingsInterface {
 
     @Override
     public String greet(String name, Language language) {
-//        return null;
         return name;
     }
 
