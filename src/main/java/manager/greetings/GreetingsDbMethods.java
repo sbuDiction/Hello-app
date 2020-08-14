@@ -41,11 +41,11 @@ public class GreetingsDbMethods implements GreetingsInterface {
 
     }
 
-    public List<String> getNames(int offset, int next) throws SQLException {
+    public List<String> getNames(int offset) throws SQLException {
         List<String> greetedList = new ArrayList<String>();
         PreparedStatement get_all_the_content = connection.prepareStatement(String.valueOf(SqlQueries.GET_NAMES.getQuery()));
         get_all_the_content.setInt(1, offset);
-        get_all_the_content.setInt(2, next);
+//        get_all_the_content.setInt(2, next);
         ResultSet resultSet = get_all_the_content.executeQuery();
 
         System.out.println(resultSet.getMetaData());

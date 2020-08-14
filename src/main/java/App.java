@@ -42,12 +42,10 @@ public class App {
             AppStater appStater = new AppStater(getConnectionFromDb());
             port(getHerokuAssignedPort());
 
-
-            get("/api/greet/greeted/names", api.greeted_names());
+            get("/api/greeted/names", api.greeted_names());
             post("/api/greetings/greet", api.greet_user(), new Serializer());
             get("/api/greetings/language", api.showLanguages(), new Serializer());
             get("/api/greetings/counter", api.get_counter());
-
         } catch (Exception e) {
             e.printStackTrace();
         }

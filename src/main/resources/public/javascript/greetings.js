@@ -39,7 +39,7 @@ const buildHomePage = () => {
 }
 
 const get_names = () => {
-    axios.get('/api/greet/greeted/names', { api_call_time: new Date().getTime() })
+    axios.get('/api/greeted/names', { api_call_time: new Date().getTime() })
         .then((response) => {
             let userName = response.data;
 
