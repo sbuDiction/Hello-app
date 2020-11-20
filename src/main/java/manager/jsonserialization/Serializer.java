@@ -1,4 +1,4 @@
-package jsonserialization;
+package manager.jsonserialization;
 
 import com.google.gson.Gson;
 import spark.ResponseTransformer;

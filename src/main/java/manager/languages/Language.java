@@ -6,10 +6,11 @@ public enum Language {
     XHOSA("Molo, "),
     RUSSIAN("Zdravstvuyte, "),
     FRENCH("Bonjour, "),
-    JAPANESE(" Konnichiwa, "),
+    JAPANESE("Konnichiwa, "),
     SWAHILI("Shikamoo, "),
     SOTHO("Dumela, "),
-    CHINESE("Nǐn hǎo, ");
+    CHINESE("Nǐn hǎo, "),
+    NewLang("new lang, ");
 
     private final String phrase;
 

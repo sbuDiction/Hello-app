@@ -14,6 +14,7 @@ public class GreetManager implements GreetingsInterface {
     public String greet(String name, Language language) {
         String username = name.substring(0, 1).toUpperCase() + name.substring(1);
         Greetings greet = new Greetings(username, language);
+
         if (language.equals(greet.getLanguage())) {
             return language.getPhrase() + username;
         } else {
@@ -34,6 +35,7 @@ public class GreetManager implements GreetingsInterface {
         ) {
             languageList.add(language.toString());
         }
+        System.out.println(languageList);
         return languageList;
     }
 

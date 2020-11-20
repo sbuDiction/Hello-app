@@ -5,8 +5,9 @@ public class People {
     private int id = 0;
     private int counter = 0;
     private int rowsCount = 0;
+    private String language = "";
 
-    public People(int id, String name, int counter,int rowsCount) {
+    public People(int id, String name, int counter, int rowsCount) {
         this.id = id;
         this.name = name;
         this.counter = counter;

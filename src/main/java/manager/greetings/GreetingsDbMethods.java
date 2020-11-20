@@ -1,19 +1,16 @@
 package manager.greetings;
 
-import com.google.gson.JsonObject;
-import jsonserialization.Serializer;
-import manager.languages.Language;
-import org.json.JSONObject;
+import manager.GreetManager;
+import manager.jsonserialization.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class GreetingsDbMethods implements GreetingsInterface {
+public class GreetingsDbMethods extends GreetManager {
     private Connection connection;
 
     public GreetingsDbMethods(Connection connection) {
@@ -75,15 +72,5 @@ public class GreetingsDbMethods implements GreetingsInterface {
             se.printStackTrace();
             return 0;
         }
-    }
-
-    @Override
-    public String greet(String name, Language language) {
-        return name;
-    }
-
-    @Override
-    public String addName(String name) {
-        return name;
     }
 }

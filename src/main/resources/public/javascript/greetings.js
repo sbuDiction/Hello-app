@@ -51,7 +51,7 @@ const get_names = () => {
         .then((response) => {
             let userName = response.data;
             console.log(response);
-            
+
             let rowsCount = 0;
 
             let showHtml = greetedNamesCompiler({ names: userName });
@@ -70,11 +70,15 @@ const get_names = () => {
                 for (let pages = 0; pages < sortPagination(rowsCount); pages++) {
                     const element = pages;
                     numbersArray.push(element)
+                    // if (numbersArray[1] !== 0) {
+                    //     console.log("hey im goo");
+                    //     page.classList.add("hide")
+                    // }
 
                     let displayPegination = pagingCompiler({ pagination: numbersArray });
                     page.innerHTML = displayPegination;
                 }
-                console.log(numbersArray, "Numbers array");
+                console.log(numbersArray[0], "Numbers array");
             }
 
 
@@ -97,7 +101,9 @@ const get_language = () => {
     axios.get('/api/greetings/language')
         .then((response) => {
             let languageList = response.data
+            console.log(languageList)
             let displayHtml = dropdownCompiler({ lang: languageList })
+            console.log(displayHtml)
             dropdownData.innerHTML = displayHtml;
         })
 }

@@ -1,6 +1,6 @@
-package jsonserialization;
+package manager.jsonserialization;
 
-public class Deserializer extends Serializer {
+public class Deserializer {
     private String userName;
     private String language;
 
