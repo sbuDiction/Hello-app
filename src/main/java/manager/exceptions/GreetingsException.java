@@ -1,9 +1,10 @@
 package manager.exceptions;
 
 public class GreetingsException extends Exception {
-    private String message;
+    private final String message;
 
     public GreetingsException() {
+        this.message = "Something went wrong with the greetings program.";
     }
 
     @Override

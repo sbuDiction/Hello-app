@@ -1,6 +1,5 @@
 package manager.greetings;
 
-import manager.Greetings;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
