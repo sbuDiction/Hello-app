@@ -1,12 +1,16 @@
 package manager;
 
+import manager.database.GreetingsDatabaseConnection;
 import manager.exceptions.LanguageNotFoundException;
 import manager.exceptions.UserAlreadyAddedException;
 import manager.exceptions.UserNameNotFoundException;
 import manager.languages.Languages;
+import manager.utils.Person;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Sibusiso
@@ -22,13 +26,17 @@ public class Greetings {
             String username = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
             String languageUpperCase = language.toUpperCase();
             String languageType = Languages.languages.get(languageUpperCase);
+            int count = 0;
             if (!username.isEmpty()) {
                 if (languageType == null) {
                     throw new LanguageNotFoundException(languageUpperCase);
                 } else {
-                    addGreetedUserNames(username);
-
-                    setGreetingsMessage(Languages.languages.get(languageUpperCase) + username);
+                    GreetingsDatabaseConnection.addPerson(new Person(
+                            username,
+                            timeStamp().toString(),
+                            count + 1,
+                            languageUpperCase));
+                    setGreetingsMessage(languageType + username);
                 }
             }
         } catch (LanguageNotFoundException languageNotFoundException) {
@@ -39,12 +47,6 @@ public class Greetings {
         }
     }
 
-    private void addGreetedUserNames(String userName) throws UserAlreadyAddedException {
-        if (namesList.contains(userName)) {
-            throw new UserAlreadyAddedException(userName);
-        }
-        namesList.add(userName);
-    }
 
     public void getUsername(String userName) {
         try {
@@ -64,5 +66,20 @@ public class Greetings {
 
     public String getGreetingsMessage() {
         return greetingsMessage;
+    }
+
+    public LocalTime timeStamp() {
+        LocalTime localTime = LocalTime.now();
+        return localTime;
+    }
+
+    public static void main(String[] args) {
+        Greetings greetings = new Greetings();
+        greetings.greetUser("sbusiso", "zulu");
+        greetings.greetUser("vusi", "english");
+
+        for (Person persons : GreetingsDatabaseConnection.getPersonList()) {
+            System.out.println(persons.getTimeStamp());
+        }
     }
 }
