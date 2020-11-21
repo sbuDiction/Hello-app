@@ -19,8 +19,6 @@ import java.util.Set;
 public class Greetings {
     private String greetingsMessage;
 
-    public List<String> namesList = new ArrayList<>();
-
     public void greetUser(String firstName, String language) {
         try {
             String username = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
@@ -48,11 +46,14 @@ public class Greetings {
     }
 
 
-    public void getUsername(String userName) {
+    public void getUserData(String userName) {
         try {
             String name = userName.substring(0, 1).toUpperCase() + userName.substring(1);
-            if (!namesList.contains(name)) {
-                throw new UserNameNotFoundException(name);
+            for (Person persons : GreetingsDatabaseConnection.getPersonList()) {
+                System.out.println(persons.getFirstName());
+                if (!name.equals(persons.getFirstName())) {
+                    throw new UserNameNotFoundException(name);
+                }
             }
         } catch (UserNameNotFoundException userNameNotFoundException) {
             setGreetingsMessage(userNameNotFoundException.getMessage());
@@ -72,6 +73,7 @@ public class Greetings {
         LocalTime localTime = LocalTime.now();
         return localTime;
     }
+
 
     public static void main(String[] args) {
         Greetings greetings = new Greetings();

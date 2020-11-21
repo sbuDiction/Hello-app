@@ -16,8 +16,8 @@ public class GreetingsTest {
     @Test
     public void greetUserNameInSothoTest() {
         manager.Greetings greetings = new manager.Greetings();
-        greetings.greetUser("sibusiso", "sotho");
-        assertEquals("Dumela, Sibusiso", greetings.getGreetingsMessage());
+        greetings.greetUser("njabulo", "sotho");
+        assertEquals("Dumela, Njabulo", greetings.getGreetingsMessage());
     }
 
 }

@@ -25,7 +25,7 @@ public class ExceptionsTest {
         manager.Greetings greetings = new manager.Greetings();
         greetings.greetUser("sibusiso", "english");
         greetings.greetUser("vusi", "english");
-        greetings.getUsername("lindani");
+        greetings.getUserData("lindani");
         assertEquals("Sorry username: Lindani does not exist.", greetings.getGreetingsMessage());
     }
 }
