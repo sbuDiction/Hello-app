@@ -1,3 +1,7 @@
 /target
 /.idea
 /node_modules
+/.classpath
+/.settings
+/greetings_db_test.mv.db
+/.project

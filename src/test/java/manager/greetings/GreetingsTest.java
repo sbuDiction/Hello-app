@@ -8,14 +8,14 @@ public class GreetingsTest {
 
     @Test
     public void greetUserNameTest() {
-        manager.Greetings greetings = new manager.Greetings();
-        greetings.greetUser("sibusiso", "zulu");
-        assertEquals("Sawubona, Sibusiso", greetings.getGreetingsMessage());
+        Greetings greetings = new Greetings();
+        greetings.greetUser("sphesihle", "zulu");
+        assertEquals("Sawubona, Sphesihle", greetings.getGreetingsMessage());
     }
 
     @Test
     public void greetUserNameInSothoTest() {
-        manager.Greetings greetings = new manager.Greetings();
+        Greetings greetings = new Greetings();
         greetings.greetUser("njabulo", "sotho");
         assertEquals("Dumela, Njabulo", greetings.getGreetingsMessage());
     }

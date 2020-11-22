@@ -1,5 +1,6 @@
 package manager.exceptions;
 
+import manager.greetings.Greetings;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,14 +8,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ExceptionsTest {
     @Test
     public void shouldThrowLanguageNotFoundExceptionTest() {
-        manager.Greetings greetings = new manager.Greetings();
-        greetings.greetUser("sibusiso", "lol");
+        Greetings greetings = new Greetings();
+        greetings.greetUser("james", "lol");
         assertEquals("The language you selected does not exist: LOL", greetings.getGreetingsMessage());
     }
 
     @Test
     public void shouldThrowUserAlreadyAddedFoundExceptionTest() {
-        manager.Greetings greetings = new manager.Greetings();
+        Greetings greetings = new Greetings();
         greetings.greetUser("sibusiso", "english");
         greetings.greetUser("sibusiso", "english");
         assertEquals("User: Sibusiso has already been added.", greetings.getGreetingsMessage());
@@ -22,8 +23,8 @@ public class ExceptionsTest {
 
     @Test
     public void shouldThrowUserNameNotFoundExceptionTest() {
-        manager.Greetings greetings = new manager.Greetings();
-        greetings.greetUser("sibusiso", "english");
+        Greetings greetings = new Greetings();
+        greetings.greetUser("thabiso", "english");
         greetings.greetUser("vusi", "english");
         greetings.getUserData("lindani");
         assertEquals("Sorry username: Lindani does not exist.", greetings.getGreetingsMessage());
