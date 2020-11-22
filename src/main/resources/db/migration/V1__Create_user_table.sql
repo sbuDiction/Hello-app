@@ -1,6 +1,8 @@
 CREATE TABLE GREETINGS
 (
-    ID SERIAL NOT NULL PRIMARY KEY,
-    NAME TEXT NOT NULL,
-    COUNT_TIME INT
+    id SERIAL NOT NULL PRIMARY KEY,
+    firstname TEXT NOT NULL,
+    time_stamp TEXT NOT NULL,
+    count_time INT,
+    language_greeted_in TEXT NOT NULL
 )
