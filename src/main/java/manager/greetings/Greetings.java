@@ -8,6 +8,8 @@ import manager.languages.Languages;
 import manager.utils.Person;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Sibusiso
@@ -15,6 +17,8 @@ import java.time.LocalTime;
 
 public class Greetings {
     private String greetingsMessage;
+    public List<Person> personList = new ArrayList<>();
+
 
     public void greetUser(String firstName, String language) {
         try {
@@ -26,11 +30,7 @@ public class Greetings {
                 if (languageType == null) {
                     throw new LanguageNotFoundException(languageUpperCase);
                 } else {
-                    GreetingsDatabaseConnection.addPerson(new Person(
-                            username,
-                            timeStamp().toString(),
-                            count + 1,
-                            languageUpperCase));
+                    addPerson(new Person(username, timeStamp().toString(), count + 1, languageUpperCase));
                     setGreetingsMessage(languageType + username);
                 }
             }
@@ -46,12 +46,13 @@ public class Greetings {
     public void getUserData(String userName) {
         try {
             String name = userName.substring(0, 1).toUpperCase() + userName.substring(1);
-            for (Person persons : GreetingsDatabaseConnection.getPersonList()) {
-                        if (!name.equals(persons.getFirstName())) {
-                    throw new UserNameNotFoundException(name);
-                } else {
-                    System.out.println(persons.getFirstName() + "\n" + persons.getTimeStamp());
+            for (Person persons : getPersonList()) {
+                System.out.println(name.equals(persons.getFirstName()));
+                System.out.println(persons);
+                if (name.equals(persons.getFirstName())) {
+                    System.out.println("User: " + persons.getFirstName() + "\n" + " was greeted at: " + persons.getTimeStamp() + "\nLanguage: " + persons.getLanguage());
                 }
+                throw new UserNameNotFoundException(name);
             }
         } catch (UserNameNotFoundException userNameNotFoundException) {
             setGreetingsMessage(userNameNotFoundException.getMessage());
@@ -72,7 +73,17 @@ public class Greetings {
         return localTime;
     }
 
-    public static void main(String[] args) {
-        
+    public void addPerson(Person person) throws UserAlreadyAddedException {
+        for (Person persons : personList) {
+            if (persons.getFirstName().equals(person.getFirstName())) {
+                throw new UserAlreadyAddedException(person.getFirstName());
+            }
+        }
+        personList.add(person);
     }
+
+    public List<Person> getPersonList() {
+        return personList;
+    }
+
 }

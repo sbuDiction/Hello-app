@@ -9,7 +9,6 @@ import java.util.List;
 
 /**
  * @author Sibusiso
- * @
  */
 
 public interface PersonData {
