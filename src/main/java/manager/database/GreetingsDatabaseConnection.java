@@ -17,7 +17,6 @@ public class GreetingsDatabaseConnection {
             if (persons.getFirstName().equals(person.getFirstName())) {
                 throw new UserAlreadyAddedException(person.getFirstName());
             }
-            break;
         }
         personList.add(person);
     }

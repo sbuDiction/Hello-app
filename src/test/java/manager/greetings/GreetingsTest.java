@@ -9,8 +9,8 @@ public class GreetingsTest {
     @Test
     public void greetUserNameTest() {
         Greetings greetings = new Greetings();
-        greetings.greetUser("sibusiso", "zulu");
-        assertEquals("Sawubona, Sibusiso", greetings.getGreetingsMessage());
+        greetings.greetUser("sphesihle", "zulu");
+        assertEquals("Sawubona, Sphesihle", greetings.getGreetingsMessage());
     }
 
     @Test

@@ -9,7 +9,7 @@ public class ExceptionsTest {
     @Test
     public void shouldThrowLanguageNotFoundExceptionTest() {
         Greetings greetings = new Greetings();
-        greetings.greetUser("sibusiso", "lol");
+        greetings.greetUser("james", "lol");
         assertEquals("The language you selected does not exist: LOL", greetings.getGreetingsMessage());
     }
 
@@ -24,7 +24,7 @@ public class ExceptionsTest {
     @Test
     public void shouldThrowUserNameNotFoundExceptionTest() {
         Greetings greetings = new Greetings();
-        greetings.greetUser("sibusiso", "english");
+        greetings.greetUser("thabiso", "english");
         greetings.greetUser("vusi", "english");
         greetings.getUserData("lindani");
         assertEquals("Sorry username: Lindani does not exist.", greetings.getGreetingsMessage());
