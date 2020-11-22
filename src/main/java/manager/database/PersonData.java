@@ -7,6 +7,11 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery;
 
 import java.util.List;
 
+/**
+ * @author Sibusiso
+ * @
+ */
+
 public interface PersonData {
     @SqlQuery("select * from greetings")
     @RegisterBeanMapper(Person.class)

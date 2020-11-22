@@ -1,4 +1,4 @@
-package manager.jsonserialization;
+package manager.utils;
 
 public class Deserializer {
     private String userName;

@@ -9,6 +9,10 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Sibusiso
+ */
+
 public class GreetingsDatabaseConnection {
     public static List<Person> personList = new ArrayList<>();
 
