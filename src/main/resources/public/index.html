@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Greetings-with-spark</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" rel="stylesheet" />
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
@@ -25,22 +25,26 @@
     .hide {
         display: none;
     }
+
+
+
+
 </style>
 
 <script type='text/template' class="greetedNames">
     <!-- content -->
 
-<h2 style="color:rgb(175, 7, 7);padding-left: 30%;" class="ui header">Greeted people</h2>
+    <h2 style="color:rgb(175, 7, 7);padding-left: 30%;" class="ui header">Greeted people</h2>
 
-<div style="color:rgb(175, 7, 7);padding-left: 28%;">
-    <table class="ui very basic collapsing celled table">
-        <thead>
+    <div style="color:rgb(175, 7, 7);padding-left: 28%;">
+        <table class="ui very basic collapsing celled table">
+            <thead>
             <tr>
                 <th>User Names</th>
                 <th>Greeted Counter</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             {{#each names}}
             <!-- <h4 style="color:rgb(175, 7, 7);padding-left: 30%;" class="ui header">Sorry no people have been greeted yet -->
             <!-- </h4> -->
@@ -60,13 +64,13 @@
                 </td>
             </tr>
             {{/each}}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <div class="pagerContent">
+        <div class="pagerContent">
 
+        </div>
     </div>
-</div>
 </script>
 
 <script type='text/template' class="greetingsHomePage">
@@ -74,9 +78,9 @@
     <div>
         <div class="greetings" style="padding-left: 33%;">
         </div>
-            <div class="ui  inverted dimmer">
-                <div class="ui mini text loader">Fetching information please wait...</div>
-            </div>
+        <div class="ui  inverted dimmer">
+            <div class="ui mini text loader">Fetching information please wait...</div>
+        </div>
     </div>
     <div style="padding-left:40%">
         <div style="color:rgb(175, 7, 7);" class="ui label">
@@ -114,84 +118,77 @@
 
 <body>
 
-    <!-- <li class="page-item"><a class="page-link" href=""></a></li> -->
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="ui secondary pointing menu">
-                    <a href="/#/home/" style="color: rgb(197, 10, 10);" class="active item homeUrl">
-                        Home
-                    </a>
-                    <!-- for later input -->
-                    <a href="/#/greeted/" style="color: rgb(197, 10, 10);" class="item greetedUrl">
-                        greeted
-                    </a>
-                </div>
+<!-- <li class="page-item"><a class="page-link" href=""></a></li> -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="ui secondary pointing menu">
+                <a href="/#/home/" style="color: rgb(197, 10, 10);" class="active item homeUrl">
+                    Home
+                </a>
+                <!-- for later input -->
+                <a href="/#/greeted/" style="color: rgb(197, 10, 10);" class="item greetedUrl">
+                    greeted
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div style="padding-bottom: 20px;" class="col">
+            <h1 style="color:rgb(175, 7, 7)" class="heading">Greetings</h1>
+        </div>
+
+        <div class="w-100"></div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
+            <div class="ui icon input">
+                <input class="name" style="color: rgb(175, 7, 7);" type="text" placeholder="Enter name..." required>
+                <i class="inverted circular  link icon"></i>
             </div>
         </div>
 
-        <div class="row">
-            <div style="padding-bottom: 20px;" class="col">
-                <h1 style="color:rgb(175, 7, 7)" class="heading">Greetings</h1>
-            </div>
-
-            <div class="w-100"></div>
-
-        </div>
-
-        <div class="row">
-            <div class="col-sm">
-                <div class="ui icon input">
-                    <input class="name" style="color: rgb(175, 7, 7);" type="text" placeholder="Enter name..." required>
-                    <i class="inverted circular  link icon"></i>
-                </div>
-            </div>
-
-            <div class="col-sm">
-                <div class="field">
-                    <div class="ui selection dropdown">
-                        <input class="language" type="hidden" name="gender" required>
-                        <i class="dropdown icon"></i>
-                        <div style="color: rgb(175, 7, 7);" class="default text">Language</div>
-                        <div class="menu languageDrop">
-                            <script type='text/template' class="dropdownLanguage">
-                                {{#lang}}
-                                <div class="item language" data-value="{{this}}">{{this}}</div>
-                                {{/lang}}
-                            </script>
-                        </div>
+        <div class="col-sm">
+            <div class="field">
+                <div class="ui selection dropdown">
+                    <input class="language" type="hidden" name="gender" required>
+                    <i class="dropdown icon"></i>
+                    <div style="color: rgb(175, 7, 7);" class="default text">Language</div>
+                    <div class="menu languageDrop">
+                        <script type='text/template' class="dropdownLanguage">
+                            {{#lang}}
+                            <div class="item language" data-value="{{this}}">{{this}}</div>
+                            {{/lang}}
+                        </script>
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm">
-                <button type="submit" class="positive ui button greet">Greet</button>
-            </div>
         </div>
 
-        <div id="tableLoader" class="ui inverted dimmer">
-            <div class="ui mini text loader">Please wait...</div>
+        <div class="col-sm">
+            <button type="submit" class="positive ui button greet">Greet</button>
         </div>
-        <div class="content" style="padding-top: 10%;">
-            <div class="ui raised very padded text container segment greetingsMain">
-                <!-- display content -->
-
-            </div>
-        </div>
-
-
-
-
-
-
     </div>
-    <div id="dimm" class="ui active dimmer">
-        <div class="ui mini text loader">Setting up please wait..</div>
+
+    <div id="tableLoader" class="ui inverted dimmer">
+        <div class="ui mini text loader">Please wait...</div>
     </div>
+    <div class="content" style="padding-top: 10%;">
+        <div class="ui raised very padded text container segment greetingsMain">
+            <!-- display content -->
+
+        </div>
     </div>
 
 
-
+</div>
+<div id="dimm" class="ui active dimmer">
+    <div class="ui mini text loader">Setting up please wait..</div>
+</div>
+</div>
 
 
 </body>

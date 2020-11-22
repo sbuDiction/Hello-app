@@ -47,7 +47,7 @@ public class Greetings {
         try {
             String name = userName.substring(0, 1).toUpperCase() + userName.substring(1);
             for (Person persons : GreetingsDatabaseConnection.getPersonList()) {
-                if (!name.equals(persons.getFirstName())) {
+                        if (!name.equals(persons.getFirstName())) {
                     throw new UserNameNotFoundException(name);
                 } else {
                     System.out.println(persons.getFirstName() + "\n" + persons.getTimeStamp());
