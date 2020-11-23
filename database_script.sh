@@ -8,7 +8,7 @@ YL='\033[1;33m'
 BL='\033[0;34m'
 
 # Database setup
-echo -e "${RED}[echo]${NC}: ${BL}Starting dataBase setup script please wait..${NC}"
+echo -e "${RED}[information]${NC}: ${BL}Starting dataBase setup script please wait..${NC}"
 
 printf "\n"
 
@@ -18,21 +18,21 @@ if [[ "$db_name" =~ ^[a-z] ]]; then
 
   printf "\n"
 
-  echo -e "${RED}[echo]${NC}: ${YL}Your database name is ${BL}${db_name}"
+  echo -e "${RED}[information]${NC}: ${YL}Your database name is ${BL}${db_name}"
 
   printf "\n"
 
-  echo -e "${RED}[echo]${NC}: ${YL}Script running please wait....."
+  echo -e "${RED}[information]${NC}: ${YL}Script running please wait....."
 
   printf "\n"
 
   sudo -u postgres createdb "$db_name"
 
-  echo -e "${RED}[echo]${NC}: ${YL}Your dataBase was successfully created"
+  echo -e "${RED}[information]${NC}: ${YL}Your dataBase was successfully created"
 
   printf "\n"
 
-  echo -e "${RED}[echo]${NC}: ${YL}sudo psql ${db_name}${NC}"
+  echo -e "${RED}[information]${NC}: ${YL}sudo psql ${db_name}${NC}"
 
   printf "\n"
 
