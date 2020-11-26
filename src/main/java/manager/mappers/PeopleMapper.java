@@ -1,4 +1,4 @@
-package mappers;
+package manager.mappers;
 
 import java.beans.ConstructorProperties;
 

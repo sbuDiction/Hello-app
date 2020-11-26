@@ -11,24 +11,24 @@ public class ExceptionsTest {
     @Test
     public void shouldThrowLanguageNotFoundExceptionTest() throws URISyntaxException {
         Greetings greetings = new Greetings();
-        greetings.greetUser("james", "lol");
+        greetings.greet.greetUser("james", "lol");
         assertEquals("The language you selected does not exist: LOL", greetings.getGreetingsMessage());
     }
 
     @Test
     public void shouldThrowUserAlreadyAddedFoundExceptionTest() throws URISyntaxException {
         Greetings greetings = new Greetings();
-        greetings.greetUser("sibusiso", "english");
-        greetings.greetUser("sibusiso", "english");
+        greetings.greet.greetUser("sibusiso", "english");
+        greetings.greet.greetUser("sibusiso", "english");
         assertEquals("User: Sibusiso has already been added.", greetings.getGreetingsMessage());
     }
 
     @Test
-    public void shouldThrowUserNameNotFoundExceptionTest() throws URISyntaxException {
+    public void shouldThrowUserNameNotFoundExceptionTest() throws UserNameNotFoundException {
         Greetings greetings = new Greetings();
-        greetings.greetUser("thabiso", "english");
-        greetings.greetUser("vusi", "english");
-        greetings.getUserData("lindani");
+        greetings.greet.greetUser("thabiso", "english");
+        greetings.greet.greetUser("vusi", "english");
+        greetings.getPerson.get("lindani");
         assertEquals("Sorry username: Lindani does not exist.", greetings.getGreetingsMessage());
     }
 }

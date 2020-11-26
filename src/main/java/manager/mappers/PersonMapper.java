@@ -1,4 +1,4 @@
-package mappers;
+package manager.mappers;
 
 import manager.utils.Person;
 import org.jdbi.v3.core.mapper.RowMapper;
