@@ -32,4 +32,9 @@ public class Person {
     public String getLanguage() {
         return language;
     }
+
+    @Override
+    public String toString() {
+        return getFirstName();
+    }
 }

@@ -1,5 +1,6 @@
 import manager.greetings.Greetings;
 
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -17,7 +18,6 @@ public class App {
             }
             if (input[0].equals("get")) {
                 greetings.getUserData(input[1]);
-                System.out.println(greetings.getGreetingsMessage());
             }
         }
     }

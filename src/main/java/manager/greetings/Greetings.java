@@ -1,12 +1,13 @@
 package manager.greetings;
 
-import manager.database.GreetingsDatabaseConnection;
+import manager.database.DataBaseManagement;
 import manager.exceptions.LanguageNotFoundException;
 import manager.exceptions.UserAlreadyAddedException;
 import manager.exceptions.UserNameNotFoundException;
 import manager.languages.Languages;
 import manager.utils.Person;
 
+import java.net.URISyntaxException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 public class Greetings {
     private String greetingsMessage;
     public List<Person> personList = new ArrayList<>();
+    public Person[] people = new Person[100];
 
 
     public void greetUser(String firstName, String language) {
@@ -31,14 +33,16 @@ public class Greetings {
                     throw new LanguageNotFoundException(languageUpperCase);
                 } else {
                     addPerson(new Person(username, timeStamp().toString(), count + 1, languageUpperCase));
+                    new DataBaseManagement().insertPerson(new Person(username, timeStamp().toString(), count + 1, languageUpperCase));
                     setGreetingsMessage(languageType + username);
                 }
             }
         } catch (LanguageNotFoundException languageNotFoundException) {
             setGreetingsMessage(languageNotFoundException.getMessage());
-
         } catch (UserAlreadyAddedException userAlreadyAddedException) {
             setGreetingsMessage(userAlreadyAddedException.getMessage());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
     }
 
@@ -46,18 +50,23 @@ public class Greetings {
     public void getUserData(String userName) {
         try {
             String name = userName.substring(0, 1).toUpperCase() + userName.substring(1);
-            for (Person persons : getPersonList()) {
-                System.out.println(name.equals(persons.getFirstName()));
-                System.out.println(persons);
-                if (name.equals(persons.getFirstName())) {
-                    System.out.println("User: " + persons.getFirstName() + "\n" + " was greeted at: " + persons.getTimeStamp() + "\nLanguage: " + persons.getLanguage());
-                }
-                throw new UserNameNotFoundException(name);
-            }
-        } catch (UserNameNotFoundException userNameNotFoundException) {
-            setGreetingsMessage(userNameNotFoundException.getMessage());
+            List<Person> person = new DataBaseManagement().getPerson(name);
+            person.forEach(user -> System.out.println(user.getFirstName() + "\n" + user.getTimeStamp() + "\n" + user.getLanguage()));
+
+
+//        } catch (UserNameNotFoundException userNameNotFoundException) {
+//            setGreetingsMessage(userNameNotFoundException.getMessage());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println();
         }
 
+
+    }
+
+    public void getPeople() throws URISyntaxException {
+        List<Person> people = new DataBaseManagement().getPeople();
     }
 
     private void setGreetingsMessage(String greetingsMessage) {
@@ -69,8 +78,7 @@ public class Greetings {
     }
 
     public LocalTime timeStamp() {
-        LocalTime localTime = LocalTime.now();
-        return localTime;
+        return LocalTime.now();
     }
 
     public void addPerson(Person person) throws UserAlreadyAddedException {

@@ -2,8 +2,12 @@ package manager.database;
 
 
 import manager.utils.Person;
+import mappers.PeopleMapper;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
+import org.jdbi.v3.sqlobject.customizer.Bind;
+import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
+import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.util.List;
 
@@ -13,10 +17,12 @@ import java.util.List;
 
 public interface PersonData {
     @SqlQuery("select * from greetings")
-    @RegisterBeanMapper(Person.class)
+    @RegisterBeanMapper(PeopleMapper.class)
     List<Person> getPeople();
 
-    @SqlQuery("select * from greetings where firstname = :firstname")
-    @RegisterBeanMapper(Person.class)
-    List<Person> getPerson();
+    @SqlQuery("select * from greetings where first_name = :firstName")
+    List<Person> getPerson(@Bind("firstName") String firstName);
+
+    @SqlUpdate("insert into greetings (first_name, time_stamp, count_time, language_greeted_in) values (:firstName, :timeStamp, :count, :language)")
+    void insertPerson(@BindBean Person person);
 }

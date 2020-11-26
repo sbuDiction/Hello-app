@@ -1,35 +1,17 @@
 package manager.database;
 
-import manager.exceptions.UserAlreadyAddedException;
-import manager.utils.Person;
 import org.jdbi.v3.core.Jdbi;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Sibusiso
  */
 
 public class GreetingsDatabaseConnection {
-    public static List<Person> personList = new ArrayList<>();
 
-    public static void addPerson(Person person) throws UserAlreadyAddedException {
-        for (Person persons : personList) {
-            if (persons.getFirstName().equals(person.getFirstName())) {
-                throw new UserAlreadyAddedException(person.getFirstName());
-            }
-        }
-        personList.add(person);
-    }
-
-    public static List<Person> getPersonList() {
-        return personList;
-    }
-
-    static Jdbi getJdbiDatabaseConnection() throws URISyntaxException {
+    public static Jdbi getJdbiDatabaseConnection() throws URISyntaxException {
         ProcessBuilder processBuilder = new ProcessBuilder();
         String database_url = processBuilder.environment().get("DATABASE_URL");
         if (database_url != null) {
@@ -47,7 +29,7 @@ public class GreetingsDatabaseConnection {
 
             return Jdbi.create(url, username, password);
         }
-        return Jdbi.create("jdbc:postgresql://localhost/taxi_fare?user=slacker&password=1234");
+        return Jdbi.create("jdbc:postgresql://localhost/greetings?user=codex&password=codex123");
     }
 
     public static int getHerokuAssignedPort() {
